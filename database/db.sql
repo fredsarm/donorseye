@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
 -- Dumped by pg_dump version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
 
--- Started on 2023-07-07 18:11:18 -03
+-- Started on 2023-07-08 15:42:15 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 3635 (class 1262 OID 27601)
+-- TOC entry 3637 (class 1262 OID 27601)
 -- Name: de; Type: DATABASE; Schema: -; Owner: derole
 --
 
@@ -80,7 +80,7 @@ CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 
 
 --
--- TOC entry 3636 (class 0 OID 0)
+-- TOC entry 3638 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
 --
@@ -113,7 +113,7 @@ CREATE TABLE accounting.bas_acc_chart (
 ALTER TABLE accounting.bas_acc_chart OWNER TO derole;
 
 --
--- TOC entry 3637 (class 0 OID 0)
+-- TOC entry 3639 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: TABLE bas_acc_chart; Type: COMMENT; Schema: accounting; Owner: derole
 --
@@ -142,7 +142,7 @@ CREATE SEQUENCE accounting.bas_acc_chart_acc_id_seq
 ALTER TABLE accounting.bas_acc_chart_acc_id_seq OWNER TO derole;
 
 --
--- TOC entry 3638 (class 0 OID 0)
+-- TOC entry 3640 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
@@ -188,7 +188,7 @@ CREATE SEQUENCE accounting.eve_entries_entry_id_seq
 ALTER TABLE accounting.eve_entries_entry_id_seq OWNER TO derole;
 
 --
--- TOC entry 3639 (class 0 OID 0)
+-- TOC entry 3641 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: eve_entries_entry_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
@@ -212,7 +212,7 @@ CREATE TABLE auth.bas_permissions (
 ALTER TABLE auth.bas_permissions OWNER TO derole;
 
 --
--- TOC entry 3640 (class 0 OID 0)
+-- TOC entry 3642 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: TABLE bas_permissions; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -240,7 +240,7 @@ CREATE SEQUENCE auth.bas_permissions_permission_id_seq
 ALTER TABLE auth.bas_permissions_permission_id_seq OWNER TO derole;
 
 --
--- TOC entry 3641 (class 0 OID 0)
+-- TOC entry 3643 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -263,7 +263,7 @@ CREATE TABLE auth.bas_roles (
 ALTER TABLE auth.bas_roles OWNER TO derole;
 
 --
--- TOC entry 3642 (class 0 OID 0)
+-- TOC entry 3644 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: TABLE bas_roles; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -291,7 +291,7 @@ CREATE SEQUENCE auth.bas_roles_role_id_seq
 ALTER TABLE auth.bas_roles_role_id_seq OWNER TO derole;
 
 --
--- TOC entry 3643 (class 0 OID 0)
+-- TOC entry 3645 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -333,7 +333,7 @@ CREATE SEQUENCE auth.bas_table_permissions_tpermission_id_seq
 ALTER TABLE auth.bas_table_permissions_tpermission_id_seq OWNER TO derole;
 
 --
--- TOC entry 3644 (class 0 OID 0)
+-- TOC entry 3646 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -371,7 +371,7 @@ CREATE SEQUENCE auth.bas_tables_table_id_seq
 ALTER TABLE auth.bas_tables_table_id_seq OWNER TO derole;
 
 --
--- TOC entry 3645 (class 0 OID 0)
+-- TOC entry 3647 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -396,7 +396,7 @@ CREATE TABLE auth.bas_users (
 ALTER TABLE auth.bas_users OWNER TO derole;
 
 --
--- TOC entry 3646 (class 0 OID 0)
+-- TOC entry 3648 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: TABLE bas_users; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -423,7 +423,7 @@ CREATE SEQUENCE auth.bas_users_user_id_seq
 ALTER TABLE auth.bas_users_user_id_seq OWNER TO derole;
 
 --
--- TOC entry 3647 (class 0 OID 0)
+-- TOC entry 3649 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: bas_users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -447,7 +447,7 @@ CREATE TABLE auth.eve_access_tokens (
 ALTER TABLE auth.eve_access_tokens OWNER TO derole;
 
 --
--- TOC entry 3648 (class 0 OID 0)
+-- TOC entry 3650 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: TABLE eve_access_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -475,7 +475,7 @@ CREATE SEQUENCE auth.eve_access_tokens_token_id_seq
 ALTER TABLE auth.eve_access_tokens_token_id_seq OWNER TO derole;
 
 --
--- TOC entry 3649 (class 0 OID 0)
+-- TOC entry 3651 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -499,7 +499,7 @@ CREATE TABLE auth.eve_audit_log (
 ALTER TABLE auth.eve_audit_log OWNER TO derole;
 
 --
--- TOC entry 3650 (class 0 OID 0)
+-- TOC entry 3652 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: TABLE eve_audit_log; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -525,7 +525,7 @@ CREATE SEQUENCE auth.eve_audit_log_log_id_seq
 ALTER TABLE auth.eve_audit_log_log_id_seq OWNER TO derole;
 
 --
--- TOC entry 3651 (class 0 OID 0)
+-- TOC entry 3653 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -549,7 +549,7 @@ CREATE TABLE auth.eve_refresh_tokens (
 ALTER TABLE auth.eve_refresh_tokens OWNER TO derole;
 
 --
--- TOC entry 3652 (class 0 OID 0)
+-- TOC entry 3654 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: TABLE eve_refresh_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -577,7 +577,7 @@ CREATE SEQUENCE auth.eve_refresh_tokens_rtoken_id_seq
 ALTER TABLE auth.eve_refresh_tokens_rtoken_id_seq OWNER TO derole;
 
 --
--- TOC entry 3653 (class 0 OID 0)
+-- TOC entry 3655 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -603,7 +603,7 @@ CREATE TABLE entities.bas_entities (
 ALTER TABLE entities.bas_entities OWNER TO derole;
 
 --
--- TOC entry 3654 (class 0 OID 0)
+-- TOC entry 3656 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: TABLE bas_entities; Type: COMMENT; Schema: entities; Owner: derole
 --
@@ -631,7 +631,7 @@ CREATE SEQUENCE entities.bas_entities_entity_id_seq
 ALTER TABLE entities.bas_entities_entity_id_seq OWNER TO derole;
 
 --
--- TOC entry 3655 (class 0 OID 0)
+-- TOC entry 3657 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE OWNED BY; Schema: entities; Owner: derole
 --
@@ -728,6 +728,15 @@ ALTER TABLE ONLY entities.bas_entities ALTER COLUMN entity_id SET DEFAULT nextva
 
 
 --
+-- TOC entry 3464 (class 2606 OID 27927)
+-- Name: bas_acc_chart bas_acc_chart_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
+--
+
+ALTER TABLE ONLY accounting.bas_acc_chart
+    ADD CONSTRAINT bas_acc_chart_pkey PRIMARY KEY (acc_id);
+
+
+--
 -- TOC entry 3462 (class 2606 OID 27872)
 -- Name: eve_entries eve_entries_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
@@ -737,7 +746,7 @@ ALTER TABLE ONLY accounting.eve_entries
 
 
 --
--- TOC entry 3472 (class 2606 OID 27882)
+-- TOC entry 3474 (class 2606 OID 27882)
 -- Name: bas_permissions bas_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -746,7 +755,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
--- TOC entry 3474 (class 2606 OID 27884)
+-- TOC entry 3476 (class 2606 OID 27884)
 -- Name: bas_roles bas_roles_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -755,7 +764,7 @@ ALTER TABLE ONLY auth.bas_roles
 
 
 --
--- TOC entry 3476 (class 2606 OID 27886)
+-- TOC entry 3478 (class 2606 OID 27886)
 -- Name: bas_table_permissions bas_table_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -764,7 +773,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3478 (class 2606 OID 27888)
+-- TOC entry 3480 (class 2606 OID 27888)
 -- Name: bas_tables bas_tables_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -773,7 +782,7 @@ ALTER TABLE ONLY auth.bas_tables
 
 
 --
--- TOC entry 3480 (class 2606 OID 27890)
+-- TOC entry 3482 (class 2606 OID 27890)
 -- Name: bas_users bas_users_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -782,7 +791,7 @@ ALTER TABLE ONLY auth.bas_users
 
 
 --
--- TOC entry 3466 (class 2606 OID 27876)
+-- TOC entry 3468 (class 2606 OID 27876)
 -- Name: eve_access_tokens eve_access_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -791,7 +800,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
--- TOC entry 3470 (class 2606 OID 27880)
+-- TOC entry 3472 (class 2606 OID 27880)
 -- Name: eve_audit_log eve_audit_log_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -800,7 +809,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
--- TOC entry 3468 (class 2606 OID 27878)
+-- TOC entry 3470 (class 2606 OID 27878)
 -- Name: eve_refresh_tokens eve_refresh_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -809,7 +818,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
 
 
 --
--- TOC entry 3464 (class 2606 OID 27874)
+-- TOC entry 3466 (class 2606 OID 27874)
 -- Name: bas_entities bas_entities_pkey; Type: CONSTRAINT; Schema: entities; Owner: derole
 --
 
@@ -818,16 +827,16 @@ ALTER TABLE ONLY entities.bas_entities
 
 
 --
--- TOC entry 3481 (class 2606 OID 27891)
--- Name: eve_entries fk_eve_entries_acc_id; Type: FK CONSTRAINT; Schema: accounting; Owner: derole
+-- TOC entry 3483 (class 2606 OID 27928)
+-- Name: eve_entries eve_entries_acc_id_fkey; Type: FK CONSTRAINT; Schema: accounting; Owner: derole
 --
 
 ALTER TABLE ONLY accounting.eve_entries
-    ADD CONSTRAINT fk_eve_entries_acc_id FOREIGN KEY (acc_id) REFERENCES entities.bas_entities(entity_id) ON UPDATE CASCADE ON DELETE CASCADE;
+    ADD CONSTRAINT eve_entries_acc_id_fkey FOREIGN KEY (acc_id) REFERENCES accounting.bas_acc_chart(acc_id) ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3485 (class 2606 OID 27911)
+-- TOC entry 3487 (class 2606 OID 27911)
 -- Name: bas_permissions bas_permissions_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -836,7 +845,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
--- TOC entry 3486 (class 2606 OID 27916)
+-- TOC entry 3488 (class 2606 OID 27916)
 -- Name: bas_table_permissions bas_table_permissions_role_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -845,7 +854,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3487 (class 2606 OID 27921)
+-- TOC entry 3489 (class 2606 OID 27921)
 -- Name: bas_table_permissions bas_table_permissions_table_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -854,7 +863,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3482 (class 2606 OID 27896)
+-- TOC entry 3484 (class 2606 OID 27896)
 -- Name: eve_access_tokens eve_access_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -863,7 +872,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
--- TOC entry 3484 (class 2606 OID 27906)
+-- TOC entry 3486 (class 2606 OID 27906)
 -- Name: eve_audit_log eve_audit_log_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -872,7 +881,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
--- TOC entry 3483 (class 2606 OID 27901)
+-- TOC entry 3485 (class 2606 OID 27901)
 -- Name: eve_refresh_tokens eve_refresh_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -880,7 +889,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
     ADD CONSTRAINT eve_refresh_tokens_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.bas_users(user_id) ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-07-07 18:11:18 -03
+-- Completed on 2023-07-08 15:42:15 -03
 
 --
 -- PostgreSQL database dump complete
