@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const knex = require('../db_connections/accConnection.js');
+const knex = require('knex')({
+  client: 'pg',
+  connection: process.env.PG_CONNECTION_STRING
+});
 
 module.exports = async function createSelectWhereAndOrder(req,res,tableName, allowCols) {
     const allowCompOps = ['=', '>', '<', '<>','<=','>=','ILIKE','NOT ILIKE'];
