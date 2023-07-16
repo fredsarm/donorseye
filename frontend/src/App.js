@@ -16,7 +16,7 @@ function App() {
   // Definição do hook 'useEffect'. Esse hook é executado uma vez após o primeiro render do componente, pois o segundo argumento é um array vazio.
   useEffect(() => {
     // Chamada da API '/api/accEveEntries' com o método axios.get. O parâmetro '?select[]=*' indica que queremos selecionar todos os campos disponíveis.
-    axios.get('/api/accEveEntries?select[]=*&where[0][column]=entry_id&where[0][operator]=%3C&where[0][value]=500')
+    axios.get('/api/accEveEntries?select[]=*&where[0][column]=entry_id&where[0][operator]=%3C&where[0][value]=4500')
       // Manipulação dos dados recebidos.
       .then(response => {
         // Definição do estado 'data' para os dados recebidos.
