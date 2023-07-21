@@ -1,8 +1,0 @@
-table {
-  border-collapse: collapse;  /* Isso faz com que as bordas das células se juntem de maneira uniforme */
-}
-
-th, td {
-  border: 1px solid black;  /* Isso adiciona uma borda preta de 1px a todas as células da tabela */
-  padding: 10px;  /* Isso adiciona um pouco de espaço entre o texto e a borda */
-}
