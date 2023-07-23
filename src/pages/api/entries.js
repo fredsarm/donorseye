@@ -1,7 +1,15 @@
-import { query } from '../../connections/conns';
+// src/pages/api/entries.js
 
-export default async (req, res) => {
-  const result = await query('SELECT * FROM accounting.vw_eve_entries where entry_id <30000 order by memo');
-  res.json(result);
+import mainQuery from '../../queries/mainQuery';
+
+const schemaName = 'accounting';
+const tableName = 'vw_eve_entries';
+
+export default async (req, res) => { //quem importa é o next.js
+  try {
+    const result = await mainQuery(req,schemaName,tableName);
+    res.json(result);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };
- 

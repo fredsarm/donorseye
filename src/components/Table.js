@@ -1,4 +1,4 @@
-// Table.js - componente da tabela
+// components/Table.js
 
 import React from 'react';
 
