@@ -1,19 +1,25 @@
-// src/queries/mainQuery.js
+// src/queries/mainQuery.js 
+// This is a generic query module that query any table data and its respective columns names translations based on the data dictionary table (syslogic.bas_data_dic).
 // Import connection to accounting database
 const accountingConn = require ('../connections/accountingConn');
 
 // Define mainQuery as an async function
-module.exports = async function mainQuery(req,schemaName,tableName) {
+module.exports = async function dictQuery(req,schemaName,tableName) {
 
-  // Define allowed columns, comparison operators, logical operators, and ordering directions
-  const allowedColumnsResult = await accountingConn.any('SELECT col_name FROM syslogic.bas_all_columns WHERE sch_name=$1 AND tab_name=$2 AND show_front_end=$3', [schemaName, tableName, true]);
+  // Declare URL parameters
+  let { pCols , pWh , pOb, language } = req.query;
+
+  // Define allowed columns. Firstly, it querys the column names available for the table 
+  // that is being passed as argument using a join that also selects its respective 
+  // translation based on the language variale that is passed with the route URL 
+  const allowedColumnsResult = await accountingConn.any('SELECT col.col_name, dic.' + language + ' FROM syslogic.bas_data_dic AS dic JOIN syslogic.bas_all_columns AS col ON dic.col_id = col.text_id WHERE col.sch_name = $1 AND col.tab_name = $2 AND col.show_front_end = $3', [schemaName, tableName, true]);
+  // Create the variable to be used for checking if the columns passed as arguments with the URL is available
   const allowedColumns = allowedColumnsResult.map(obj => obj.col_name);
+  // Define all allowed comparison operators, logical operators, and ordering directions
   const allowedCompOps = ['=', '>', '<', '<>','<=','>=','ILIKE','NOT ILIKE'];
   const allowedLogOps = ['AND','OR','NOT'];
   const allowedDirs = ['ASC', 'DESC'];
-
   // Retrieve query parameters from request
-  let { pCols , pWh , pOb } = req.query;
   let query;
   // Check if columns to fetch are defined
   if (!pCols) {
@@ -113,21 +119,29 @@ module.exports = async function mainQuery(req,schemaName,tableName) {
 
   // Execute the query
   const data = await accountingConn.any(query,values);
-  // Return the result
-  return data;
+
+
+
+  
+  // Return the result and the dictionary for the table columns
+  return {
+    'data': data,
+    'dictData':allowedColumnsResult
+  };
 };
 
 /*
 Rules:
-All 3 parâmeters have to be passed with the URL. If you don't want to set a WHERE or ORDER BY clause, pass it anyway but with empty value, like this:
+All 4 parâmeters have to be passed with the URL. If you don't want to set a WHERE or ORDER BY clause, pass it anyway but with empty value, like this:
 const pWh = '';
 const pOb = '';
 All operators have to be uppercase (AND, OR, NOT, ILIKE not and, or, not, ilike)
 In case of ILIKE or NOT ILIKE parameter, do not include the % in the URL. This module will include it at the processing time. 
-These are examples of the 3 parameters included in the front-end app:
+These are examples of the 4 parameters included in the front-end app:
 
     const pCols = 'entry_id,entry_date,memo,debit,credit';
     const pWh = encodeURIComponent(JSON.stringify([{"col":"entry_id","comparisonOperator":"<","value":"30000"},{"logicOperator":"AND","col":"memo","comparisonOperator":"ILIKE","value":"reembolso"}]));
     const pOb = encodeURIComponent(JSON.stringify([{"col":"entry_date","direction":"DESC"},{"col":"entry_id","direction":"DESC"}]));
-
+    const language = 'en_us';
 */
+
