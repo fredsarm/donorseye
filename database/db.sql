@@ -5,31 +5,7 @@
 -- Dumped from database version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
 -- Dumped by pg_dump version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
 
--- Started on 2023-07-15 21:03:51 -03
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-DROP DATABASE de;
---
--- TOC entry 3710 (class 1262 OID 28747)
--- Name: de; Type: DATABASE; Schema: -; Owner: derole
---
-
-CREATE DATABASE de WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.UTF-8';
-
-
-ALTER DATABASE de OWNER TO derole;
-
-\connect de
+-- Started on 2023-07-27 16:15:20 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -101,7 +77,7 @@ CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 
 
 --
--- TOC entry 3712 (class 0 OID 0)
+-- TOC entry 3722 (class 0 OID 0)
 -- Dependencies: 2
 -- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
 --
@@ -110,7 +86,7 @@ COMMENT ON EXTENSION ltree IS 'data type for hierarchical tree-like structures';
 
 
 --
--- TOC entry 339 (class 1255 OID 28937)
+-- TOC entry 342 (class 1255 OID 29136)
 -- Name: sync_bas_all_columns_trigger(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -123,9 +99,11 @@ BEGIN
     -- This is achieved by selecting from information_schema.columns (src) and left joining with bas_all_columns (tgt)
     -- The WHERE clause filters to only include columns in the specified schemas, and where the column does not already exist in bas_all_columns
     -- The ORDER BY clause orders the results by schema name and table name, although this has no impact on the final state of bas_all_columns
-    INSERT INTO syslogic.bas_all_columns (sch_name, tab_name, col_name, text_id)
+    
+    INSERT INTO syslogic.bas_all_columns (sch_name, tab_name, col_name, text_id,data_type)
     SELECT src.table_schema, src.table_name, src.column_name,
-        src.table_schema || '.' || src.table_name || '.' || src.column_name
+        src.table_schema || '.' || src.table_name || '.' || src.column_name,
+        src.data_type
     FROM information_schema.columns AS src
     LEFT JOIN syslogic.bas_all_columns AS tgt
     ON src.table_schema || '.' || src.table_name || '.' || src.column_name = tgt.text_id
@@ -157,7 +135,7 @@ $$;
 ALTER FUNCTION public.sync_bas_all_columns_trigger() OWNER TO postgres;
 
 --
--- TOC entry 337 (class 1255 OID 29126)
+-- TOC entry 339 (class 1255 OID 29126)
 -- Name: delete_bas_data_dic(); Type: FUNCTION; Schema: syslogic; Owner: postgres
 --
 
@@ -175,7 +153,7 @@ $$;
 ALTER FUNCTION syslogic.delete_bas_data_dic() OWNER TO postgres;
 
 --
--- TOC entry 340 (class 1255 OID 29124)
+-- TOC entry 341 (class 1255 OID 29124)
 -- Name: insert_bas_data_dic(); Type: FUNCTION; Schema: syslogic; Owner: postgres
 --
 
@@ -216,7 +194,7 @@ CREATE TABLE accounting.bas_acc_chart (
 ALTER TABLE accounting.bas_acc_chart OWNER TO derole;
 
 --
--- TOC entry 3713 (class 0 OID 0)
+-- TOC entry 3723 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: TABLE bas_acc_chart; Type: COMMENT; Schema: accounting; Owner: derole
 --
@@ -245,7 +223,7 @@ CREATE SEQUENCE accounting.bas_acc_chart_acc_id_seq
 ALTER TABLE accounting.bas_acc_chart_acc_id_seq OWNER TO derole;
 
 --
--- TOC entry 3714 (class 0 OID 0)
+-- TOC entry 3724 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
@@ -291,7 +269,7 @@ CREATE SEQUENCE accounting.eve_entries_entry_id_seq
 ALTER TABLE accounting.eve_entries_entry_id_seq OWNER TO derole;
 
 --
--- TOC entry 3715 (class 0 OID 0)
+-- TOC entry 3725 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: eve_entries_entry_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
@@ -316,7 +294,7 @@ CREATE TABLE auth.bas_users (
 ALTER TABLE auth.bas_users OWNER TO derole;
 
 --
--- TOC entry 3716 (class 0 OID 0)
+-- TOC entry 3726 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: TABLE bas_users; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -344,7 +322,7 @@ CREATE TABLE entities.bas_entities (
 ALTER TABLE entities.bas_entities OWNER TO derole;
 
 --
--- TOC entry 3717 (class 0 OID 0)
+-- TOC entry 3727 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: TABLE bas_entities; Type: COMMENT; Schema: entities; Owner: derole
 --
@@ -397,7 +375,7 @@ CREATE TABLE auth.bas_permissions (
 ALTER TABLE auth.bas_permissions OWNER TO derole;
 
 --
--- TOC entry 3718 (class 0 OID 0)
+-- TOC entry 3728 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: TABLE bas_permissions; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -425,7 +403,7 @@ CREATE SEQUENCE auth.bas_permissions_permission_id_seq
 ALTER TABLE auth.bas_permissions_permission_id_seq OWNER TO derole;
 
 --
--- TOC entry 3719 (class 0 OID 0)
+-- TOC entry 3729 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -448,7 +426,7 @@ CREATE TABLE auth.bas_roles (
 ALTER TABLE auth.bas_roles OWNER TO derole;
 
 --
--- TOC entry 3720 (class 0 OID 0)
+-- TOC entry 3730 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: TABLE bas_roles; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -476,7 +454,7 @@ CREATE SEQUENCE auth.bas_roles_role_id_seq
 ALTER TABLE auth.bas_roles_role_id_seq OWNER TO derole;
 
 --
--- TOC entry 3721 (class 0 OID 0)
+-- TOC entry 3731 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -518,7 +496,7 @@ CREATE SEQUENCE auth.bas_table_permissions_tpermission_id_seq
 ALTER TABLE auth.bas_table_permissions_tpermission_id_seq OWNER TO derole;
 
 --
--- TOC entry 3722 (class 0 OID 0)
+-- TOC entry 3732 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -556,7 +534,7 @@ CREATE SEQUENCE auth.bas_tables_table_id_seq
 ALTER TABLE auth.bas_tables_table_id_seq OWNER TO derole;
 
 --
--- TOC entry 3723 (class 0 OID 0)
+-- TOC entry 3733 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -581,7 +559,7 @@ CREATE SEQUENCE auth.bas_users_user_id_seq
 ALTER TABLE auth.bas_users_user_id_seq OWNER TO derole;
 
 --
--- TOC entry 3724 (class 0 OID 0)
+-- TOC entry 3734 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: bas_users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -605,7 +583,7 @@ CREATE TABLE auth.eve_access_tokens (
 ALTER TABLE auth.eve_access_tokens OWNER TO derole;
 
 --
--- TOC entry 3725 (class 0 OID 0)
+-- TOC entry 3735 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: TABLE eve_access_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -633,7 +611,7 @@ CREATE SEQUENCE auth.eve_access_tokens_token_id_seq
 ALTER TABLE auth.eve_access_tokens_token_id_seq OWNER TO derole;
 
 --
--- TOC entry 3726 (class 0 OID 0)
+-- TOC entry 3736 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -657,7 +635,7 @@ CREATE TABLE auth.eve_audit_log (
 ALTER TABLE auth.eve_audit_log OWNER TO derole;
 
 --
--- TOC entry 3727 (class 0 OID 0)
+-- TOC entry 3737 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: TABLE eve_audit_log; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -683,7 +661,7 @@ CREATE SEQUENCE auth.eve_audit_log_log_id_seq
 ALTER TABLE auth.eve_audit_log_log_id_seq OWNER TO derole;
 
 --
--- TOC entry 3728 (class 0 OID 0)
+-- TOC entry 3738 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -707,7 +685,7 @@ CREATE TABLE auth.eve_refresh_tokens (
 ALTER TABLE auth.eve_refresh_tokens OWNER TO derole;
 
 --
--- TOC entry 3729 (class 0 OID 0)
+-- TOC entry 3739 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: TABLE eve_refresh_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
@@ -735,7 +713,7 @@ CREATE SEQUENCE auth.eve_refresh_tokens_rtoken_id_seq
 ALTER TABLE auth.eve_refresh_tokens_rtoken_id_seq OWNER TO derole;
 
 --
--- TOC entry 3730 (class 0 OID 0)
+-- TOC entry 3740 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
@@ -759,12 +737,51 @@ CREATE SEQUENCE entities.bas_entities_entity_id_seq
 ALTER TABLE entities.bas_entities_entity_id_seq OWNER TO derole;
 
 --
--- TOC entry 3731 (class 0 OID 0)
+-- TOC entry 3741 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE OWNED BY; Schema: entities; Owner: derole
 --
 
 ALTER SEQUENCE entities.bas_entities_entity_id_seq OWNED BY entities.bas_entities.entity_id;
+
+
+--
+-- TOC entry 250 (class 1259 OID 29129)
+-- Name: todos; Type: TABLE; Schema: public; Owner: derole
+--
+
+CREATE TABLE public.todos (
+    id integer NOT NULL,
+    text character varying(255) NOT NULL,
+    done boolean DEFAULT false NOT NULL
+);
+
+
+ALTER TABLE public.todos OWNER TO derole;
+
+--
+-- TOC entry 249 (class 1259 OID 29128)
+-- Name: todos_id_seq; Type: SEQUENCE; Schema: public; Owner: derole
+--
+
+CREATE SEQUENCE public.todos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.todos_id_seq OWNER TO derole;
+
+--
+-- TOC entry 3742 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: todos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: derole
+--
+
+ALTER SEQUENCE public.todos_id_seq OWNED BY public.todos.id;
 
 
 --
@@ -777,7 +794,8 @@ CREATE TABLE syslogic.bas_all_columns (
     sch_name text NOT NULL,
     tab_name text NOT NULL,
     col_name text NOT NULL,
-    show_front_end boolean DEFAULT true NOT NULL
+    show_front_end boolean DEFAULT true NOT NULL,
+    data_type text
 );
 
 
@@ -794,14 +812,15 @@ CREATE TABLE syslogic.bas_data_dic (
     def_class numeric,
     col_id text,
     en_us text,
-    pt_br text
+    pt_br text,
+    teste text
 );
 
 
 ALTER TABLE syslogic.bas_data_dic OWNER TO derole;
 
 --
--- TOC entry 3732 (class 0 OID 0)
+-- TOC entry 3743 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: TABLE bas_data_dic; Type: COMMENT; Schema: syslogic; Owner: derole
 --
@@ -839,7 +858,7 @@ CREATE SEQUENCE syslogic.bas_data_dic_class_class_id_seq
 ALTER TABLE syslogic.bas_data_dic_class_class_id_seq OWNER TO derole;
 
 --
--- TOC entry 3733 (class 0 OID 0)
+-- TOC entry 3744 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: bas_data_dic_class_class_id_seq; Type: SEQUENCE OWNED BY; Schema: syslogic; Owner: derole
 --
@@ -864,7 +883,7 @@ CREATE SEQUENCE syslogic.bas_data_dic_def_id_seq
 ALTER TABLE syslogic.bas_data_dic_def_id_seq OWNER TO derole;
 
 --
--- TOC entry 3734 (class 0 OID 0)
+-- TOC entry 3745 (class 0 OID 0)
 -- Dependencies: 246
 -- Name: bas_data_dic_def_id_seq; Type: SEQUENCE OWNED BY; Schema: syslogic; Owner: derole
 --
@@ -903,7 +922,7 @@ CREATE SEQUENCE syslogic.bas_data_dic_lang_lang_id_seq
 ALTER TABLE syslogic.bas_data_dic_lang_lang_id_seq OWNER TO derole;
 
 --
--- TOC entry 3735 (class 0 OID 0)
+-- TOC entry 3746 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: bas_data_dic_lang_lang_id_seq; Type: SEQUENCE OWNED BY; Schema: syslogic; Owner: derole
 --
@@ -912,7 +931,7 @@ ALTER SEQUENCE syslogic.bas_data_dic_lang_lang_id_seq OWNED BY syslogic.bas_data
 
 
 --
--- TOC entry 3464 (class 2604 OID 29038)
+-- TOC entry 3469 (class 2604 OID 29038)
 -- Name: bas_acc_chart acc_id; Type: DEFAULT; Schema: accounting; Owner: derole
 --
 
@@ -920,7 +939,7 @@ ALTER TABLE ONLY accounting.bas_acc_chart ALTER COLUMN acc_id SET DEFAULT nextva
 
 
 --
--- TOC entry 3468 (class 2604 OID 29039)
+-- TOC entry 3473 (class 2604 OID 29039)
 -- Name: eve_entries entry_id; Type: DEFAULT; Schema: accounting; Owner: derole
 --
 
@@ -928,7 +947,7 @@ ALTER TABLE ONLY accounting.eve_entries ALTER COLUMN entry_id SET DEFAULT nextva
 
 
 --
--- TOC entry 3478 (class 2604 OID 29040)
+-- TOC entry 3483 (class 2604 OID 29040)
 -- Name: bas_permissions permission_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -936,7 +955,7 @@ ALTER TABLE ONLY auth.bas_permissions ALTER COLUMN permission_id SET DEFAULT nex
 
 
 --
--- TOC entry 3480 (class 2604 OID 29041)
+-- TOC entry 3485 (class 2604 OID 29041)
 -- Name: bas_roles role_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -944,7 +963,7 @@ ALTER TABLE ONLY auth.bas_roles ALTER COLUMN role_id SET DEFAULT nextval('auth.b
 
 
 --
--- TOC entry 3481 (class 2604 OID 29042)
+-- TOC entry 3486 (class 2604 OID 29042)
 -- Name: bas_table_permissions tpermission_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -952,7 +971,7 @@ ALTER TABLE ONLY auth.bas_table_permissions ALTER COLUMN tpermission_id SET DEFA
 
 
 --
--- TOC entry 3482 (class 2604 OID 29043)
+-- TOC entry 3487 (class 2604 OID 29043)
 -- Name: bas_tables table_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -960,7 +979,7 @@ ALTER TABLE ONLY auth.bas_tables ALTER COLUMN table_id SET DEFAULT nextval('auth
 
 
 --
--- TOC entry 3474 (class 2604 OID 29044)
+-- TOC entry 3479 (class 2604 OID 29044)
 -- Name: bas_users user_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -968,7 +987,7 @@ ALTER TABLE ONLY auth.bas_users ALTER COLUMN user_id SET DEFAULT nextval('auth.b
 
 
 --
--- TOC entry 3483 (class 2604 OID 29045)
+-- TOC entry 3488 (class 2604 OID 29045)
 -- Name: eve_access_tokens token_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -976,7 +995,7 @@ ALTER TABLE ONLY auth.eve_access_tokens ALTER COLUMN token_id SET DEFAULT nextva
 
 
 --
--- TOC entry 3485 (class 2604 OID 29046)
+-- TOC entry 3490 (class 2604 OID 29046)
 -- Name: eve_audit_log log_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -984,7 +1003,7 @@ ALTER TABLE ONLY auth.eve_audit_log ALTER COLUMN log_id SET DEFAULT nextval('aut
 
 
 --
--- TOC entry 3487 (class 2604 OID 29047)
+-- TOC entry 3492 (class 2604 OID 29047)
 -- Name: eve_refresh_tokens rtoken_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -992,7 +1011,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens ALTER COLUMN rtoken_id SET DEFAULT next
 
 
 --
--- TOC entry 3476 (class 2604 OID 29048)
+-- TOC entry 3481 (class 2604 OID 29048)
 -- Name: bas_entities entity_id; Type: DEFAULT; Schema: entities; Owner: derole
 --
 
@@ -1000,7 +1019,15 @@ ALTER TABLE ONLY entities.bas_entities ALTER COLUMN entity_id SET DEFAULT nextva
 
 
 --
--- TOC entry 3490 (class 2604 OID 29049)
+-- TOC entry 3498 (class 2604 OID 29132)
+-- Name: todos id; Type: DEFAULT; Schema: public; Owner: derole
+--
+
+ALTER TABLE ONLY public.todos ALTER COLUMN id SET DEFAULT nextval('public.todos_id_seq'::regclass);
+
+
+--
+-- TOC entry 3495 (class 2604 OID 29049)
 -- Name: bas_data_dic def_id; Type: DEFAULT; Schema: syslogic; Owner: derole
 --
 
@@ -1008,7 +1035,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic ALTER COLUMN def_id SET DEFAULT nextval('
 
 
 --
--- TOC entry 3491 (class 2604 OID 29050)
+-- TOC entry 3496 (class 2604 OID 29050)
 -- Name: bas_data_dic_class class_id; Type: DEFAULT; Schema: syslogic; Owner: derole
 --
 
@@ -1016,7 +1043,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic_class ALTER COLUMN class_id SET DEFAULT n
 
 
 --
--- TOC entry 3492 (class 2604 OID 29051)
+-- TOC entry 3497 (class 2604 OID 29051)
 -- Name: bas_data_dic_lang lang_id; Type: DEFAULT; Schema: syslogic; Owner: derole
 --
 
@@ -1024,7 +1051,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic_lang ALTER COLUMN lang_id SET DEFAULT nex
 
 
 --
--- TOC entry 3676 (class 0 OID 28938)
+-- TOC entry 3685 (class 0 OID 28938)
 -- Dependencies: 219
 -- Data for Name: bas_acc_chart; Type: TABLE DATA; Schema: accounting; Owner: derole
 --
@@ -1035,7 +1062,7 @@ COPY accounting.bas_acc_chart (acc_id, acc_parent, acc_path, acc_order, acc_name
 
 
 --
--- TOC entry 3678 (class 0 OID 28947)
+-- TOC entry 3687 (class 0 OID 28947)
 -- Dependencies: 221
 -- Data for Name: eve_entries; Type: TABLE DATA; Schema: accounting; Owner: derole
 --
@@ -30965,7 +30992,7 @@ COPY accounting.eve_entries (entry_id, entry_date, occur_date, acc_id, entry_par
 
 
 --
--- TOC entry 3682 (class 0 OID 28975)
+-- TOC entry 3691 (class 0 OID 28975)
 -- Dependencies: 226
 -- Data for Name: bas_permissions; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -30975,7 +31002,7 @@ COPY auth.bas_permissions (permission_id, user_id, role_id, created_at) FROM std
 
 
 --
--- TOC entry 3684 (class 0 OID 28980)
+-- TOC entry 3693 (class 0 OID 28980)
 -- Dependencies: 228
 -- Data for Name: bas_roles; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -30985,7 +31012,7 @@ COPY auth.bas_roles (role_id, name, description) FROM stdin;
 
 
 --
--- TOC entry 3686 (class 0 OID 28986)
+-- TOC entry 3695 (class 0 OID 28986)
 -- Dependencies: 230
 -- Data for Name: bas_table_permissions; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -30995,7 +31022,7 @@ COPY auth.bas_table_permissions (tpermission_id, table_id, role_id, can_read, ca
 
 
 --
--- TOC entry 3688 (class 0 OID 28990)
+-- TOC entry 3697 (class 0 OID 28990)
 -- Dependencies: 232
 -- Data for Name: bas_tables; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -31005,7 +31032,7 @@ COPY auth.bas_tables (table_id, table_name) FROM stdin;
 
 
 --
--- TOC entry 3680 (class 0 OID 28958)
+-- TOC entry 3689 (class 0 OID 28958)
 -- Dependencies: 223
 -- Data for Name: bas_users; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -31016,7 +31043,7 @@ COPY auth.bas_users (user_id, user_name, user_password, email, created_at) FROM 
 
 
 --
--- TOC entry 3691 (class 0 OID 28995)
+-- TOC entry 3700 (class 0 OID 28995)
 -- Dependencies: 235
 -- Data for Name: eve_access_tokens; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -31026,7 +31053,7 @@ COPY auth.eve_access_tokens (token_id, token, user_id, created_at) FROM stdin;
 
 
 --
--- TOC entry 3693 (class 0 OID 29000)
+-- TOC entry 3702 (class 0 OID 29000)
 -- Dependencies: 237
 -- Data for Name: eve_audit_log; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -31036,7 +31063,7 @@ COPY auth.eve_audit_log (log_id, user_id, activity, created_at) FROM stdin;
 
 
 --
--- TOC entry 3695 (class 0 OID 29007)
+-- TOC entry 3704 (class 0 OID 29007)
 -- Dependencies: 239
 -- Data for Name: eve_refresh_tokens; Type: TABLE DATA; Schema: auth; Owner: derole
 --
@@ -31046,7 +31073,7 @@ COPY auth.eve_refresh_tokens (rtoken_id, token, user_id, created_at) FROM stdin;
 
 
 --
--- TOC entry 3681 (class 0 OID 28964)
+-- TOC entry 3690 (class 0 OID 28964)
 -- Dependencies: 224
 -- Data for Name: bas_entities; Type: TABLE DATA; Schema: entities; Owner: derole
 --
@@ -31057,195 +31084,213 @@ COPY entities.bas_entities (entity_id, entity_name, entity_parent, entity_passwo
 
 
 --
--- TOC entry 3698 (class 0 OID 29013)
+-- TOC entry 3715 (class 0 OID 29129)
+-- Dependencies: 250
+-- Data for Name: todos; Type: TABLE DATA; Schema: public; Owner: derole
+--
+
+COPY public.todos (id, text, done) FROM stdin;
+17	maluco	f
+18	beleza	f
+19	tá foda	f
+20	conseguir	f
+\.
+
+
+--
+-- TOC entry 3707 (class 0 OID 29013)
 -- Dependencies: 242
 -- Data for Name: bas_all_columns; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
 
-COPY syslogic.bas_all_columns (text_id, sch_name, tab_name, col_name, show_front_end) FROM stdin;
-accounting.bas_acc_chart.balance	accounting	bas_acc_chart	balance	t
-accounting.bas_acc_chart.inactive	accounting	bas_acc_chart	inactive	t
-accounting.bas_acc_chart.acc_order	accounting	bas_acc_chart	acc_order	t
-accounting.bas_acc_chart.acc_name	accounting	bas_acc_chart	acc_name	t
-accounting.bas_acc_chart.init_balance	accounting	bas_acc_chart	init_balance	t
-accounting.bas_acc_chart.acc_id	accounting	bas_acc_chart	acc_id	t
-accounting.bas_acc_chart.acc_parent	accounting	bas_acc_chart	acc_parent	t
-accounting.bas_acc_chart.acc_path	accounting	bas_acc_chart	acc_path	t
-accounting.eve_entries.credit	accounting	eve_entries	credit	t
-accounting.eve_entries.entry_id	accounting	eve_entries	entry_id	t
-accounting.eve_entries.acc_id	accounting	eve_entries	acc_id	t
-accounting.eve_entries.entity_id	accounting	eve_entries	entity_id	t
-accounting.eve_entries.entry_parent	accounting	eve_entries	entry_parent	t
-accounting.eve_entries.occur_date	accounting	eve_entries	occur_date	t
-accounting.eve_entries.entry_date	accounting	eve_entries	entry_date	t
-accounting.eve_entries.memo	accounting	eve_entries	memo	t
-accounting.eve_entries.debit	accounting	eve_entries	debit	t
-accounting.eve_entries.balance	accounting	eve_entries	balance	t
-accounting.eve_entries.user_id	accounting	eve_entries	user_id	t
-accounting.vw_eve_entries.user_id	accounting	vw_eve_entries	user_id	t
-accounting.vw_eve_entries.balance	accounting	vw_eve_entries	balance	t
-accounting.vw_eve_entries.entity_id	accounting	vw_eve_entries	entity_id	t
-accounting.vw_eve_entries.memo	accounting	vw_eve_entries	memo	t
-accounting.vw_eve_entries.credit	accounting	vw_eve_entries	credit	t
-accounting.vw_eve_entries.occur_date	accounting	vw_eve_entries	occur_date	t
-accounting.vw_eve_entries.entry_date	accounting	vw_eve_entries	entry_date	t
-accounting.vw_eve_entries.debit	accounting	vw_eve_entries	debit	t
-accounting.vw_eve_entries.acc_id	accounting	vw_eve_entries	acc_id	t
-accounting.vw_eve_entries.entry_parent	accounting	vw_eve_entries	entry_parent	t
-accounting.vw_eve_entries.entry_id	accounting	vw_eve_entries	entry_id	t
-auth.bas_permissions.created_at	auth	bas_permissions	created_at	t
-auth.bas_permissions.permission_id	auth	bas_permissions	permission_id	t
-auth.bas_permissions.role_id	auth	bas_permissions	role_id	t
-auth.bas_permissions.user_id	auth	bas_permissions	user_id	t
-auth.bas_roles.name	auth	bas_roles	name	t
-auth.bas_roles.role_id	auth	bas_roles	role_id	t
-auth.bas_roles.description	auth	bas_roles	description	t
-auth.bas_table_permissions.role_id	auth	bas_table_permissions	role_id	t
-auth.bas_table_permissions.tpermission_id	auth	bas_table_permissions	tpermission_id	t
-auth.bas_table_permissions.table_id	auth	bas_table_permissions	table_id	t
-auth.bas_table_permissions.can_write	auth	bas_table_permissions	can_write	t
-auth.bas_table_permissions.can_read	auth	bas_table_permissions	can_read	t
-auth.bas_table_permissions.can_delete	auth	bas_table_permissions	can_delete	t
-auth.bas_tables.table_name	auth	bas_tables	table_name	t
-auth.bas_tables.table_id	auth	bas_tables	table_id	t
-auth.bas_users.email	auth	bas_users	email	t
-auth.bas_users.user_name	auth	bas_users	user_name	t
-auth.bas_users.created_at	auth	bas_users	created_at	t
-auth.bas_users.user_id	auth	bas_users	user_id	t
-auth.bas_users.user_password	auth	bas_users	user_password	t
-auth.eve_access_tokens.token	auth	eve_access_tokens	token	t
-auth.eve_access_tokens.user_id	auth	eve_access_tokens	user_id	t
-auth.eve_access_tokens.token_id	auth	eve_access_tokens	token_id	t
-auth.eve_access_tokens.created_at	auth	eve_access_tokens	created_at	t
-auth.eve_audit_log.activity	auth	eve_audit_log	activity	t
-auth.eve_audit_log.log_id	auth	eve_audit_log	log_id	t
-auth.eve_audit_log.user_id	auth	eve_audit_log	user_id	t
-auth.eve_audit_log.created_at	auth	eve_audit_log	created_at	t
-auth.eve_refresh_tokens.token	auth	eve_refresh_tokens	token	t
-auth.eve_refresh_tokens.rtoken_id	auth	eve_refresh_tokens	rtoken_id	t
-auth.eve_refresh_tokens.created_at	auth	eve_refresh_tokens	created_at	t
-auth.eve_refresh_tokens.user_id	auth	eve_refresh_tokens	user_id	t
-entities.bas_entities.entity_id	entities	bas_entities	entity_id	t
-entities.bas_entities.email	entities	bas_entities	email	t
-entities.bas_entities.created_at	entities	bas_entities	created_at	t
-entities.bas_entities.entity_parent	entities	bas_entities	entity_parent	t
-entities.bas_entities.entity_password	entities	bas_entities	entity_password	t
-entities.bas_entities.entity_name	entities	bas_entities	entity_name	t
-syslogic.bas_all_columns.text_id	syslogic	bas_all_columns	text_id	t
-syslogic.bas_all_columns.show_front_end	syslogic	bas_all_columns	show_front_end	t
-syslogic.bas_all_columns.tab_name	syslogic	bas_all_columns	tab_name	t
-syslogic.bas_all_columns.col_name	syslogic	bas_all_columns	col_name	t
-syslogic.bas_all_columns.sch_name	syslogic	bas_all_columns	sch_name	t
-syslogic.bas_data_dic.en_us	syslogic	bas_data_dic	en_us	t
-syslogic.bas_data_dic.def_id	syslogic	bas_data_dic	def_id	t
-syslogic.bas_data_dic.def_class	syslogic	bas_data_dic	def_class	t
-syslogic.bas_data_dic.def_name	syslogic	bas_data_dic	def_name	t
-syslogic.bas_data_dic.pt_br	syslogic	bas_data_dic	pt_br	t
-syslogic.bas_data_dic.col_id	syslogic	bas_data_dic	col_id	t
-syslogic.bas_data_dic_class.class_id	syslogic	bas_data_dic_class	class_id	t
-syslogic.bas_data_dic_class.class_name	syslogic	bas_data_dic_class	class_name	t
-syslogic.bas_data_dic_lang.lang_code	syslogic	bas_data_dic_lang	lang_code	t
-syslogic.bas_data_dic_lang.lang_name	syslogic	bas_data_dic_lang	lang_name	t
-syslogic.bas_data_dic_lang.lang_id	syslogic	bas_data_dic_lang	lang_id	t
+COPY syslogic.bas_all_columns (text_id, sch_name, tab_name, col_name, show_front_end, data_type) FROM stdin;
+accounting.bas_acc_chart.acc_id	accounting	bas_acc_chart	acc_id	t	smallint
+accounting.bas_acc_chart.init_balance	accounting	bas_acc_chart	init_balance	t	numeric
+accounting.bas_acc_chart.acc_name	accounting	bas_acc_chart	acc_name	t	text
+accounting.bas_acc_chart.acc_parent	accounting	bas_acc_chart	acc_parent	t	smallint
+accounting.bas_acc_chart.inactive	accounting	bas_acc_chart	inactive	t	boolean
+accounting.bas_acc_chart.acc_order	accounting	bas_acc_chart	acc_order	t	smallint
+accounting.bas_acc_chart.balance	accounting	bas_acc_chart	balance	t	numeric
+accounting.bas_acc_chart.acc_path	accounting	bas_acc_chart	acc_path	t	USER-DEFINED
+accounting.eve_entries.entry_date	accounting	eve_entries	entry_date	t	timestamp without time zone
+accounting.eve_entries.entity_id	accounting	eve_entries	entity_id	t	integer
+accounting.eve_entries.memo	accounting	eve_entries	memo	t	text
+accounting.eve_entries.credit	accounting	eve_entries	credit	t	numeric
+accounting.eve_entries.debit	accounting	eve_entries	debit	t	numeric
+accounting.eve_entries.entry_parent	accounting	eve_entries	entry_parent	t	integer
+accounting.eve_entries.balance	accounting	eve_entries	balance	t	numeric
+accounting.eve_entries.entry_id	accounting	eve_entries	entry_id	t	integer
+accounting.eve_entries.occur_date	accounting	eve_entries	occur_date	t	date
+accounting.eve_entries.acc_id	accounting	eve_entries	acc_id	t	integer
+accounting.eve_entries.user_id	accounting	eve_entries	user_id	t	integer
+accounting.vw_eve_entries.acc_id	accounting	vw_eve_entries	acc_id	t	text
+accounting.vw_eve_entries.credit	accounting	vw_eve_entries	credit	t	numeric
+accounting.vw_eve_entries.entry_date	accounting	vw_eve_entries	entry_date	t	timestamp without time zone
+accounting.vw_eve_entries.entity_id	accounting	vw_eve_entries	entity_id	t	text
+accounting.vw_eve_entries.occur_date	accounting	vw_eve_entries	occur_date	t	date
+accounting.vw_eve_entries.memo	accounting	vw_eve_entries	memo	t	text
+accounting.vw_eve_entries.debit	accounting	vw_eve_entries	debit	t	numeric
+accounting.vw_eve_entries.balance	accounting	vw_eve_entries	balance	t	numeric
+accounting.vw_eve_entries.entry_id	accounting	vw_eve_entries	entry_id	t	integer
+accounting.vw_eve_entries.user_id	accounting	vw_eve_entries	user_id	t	text
+accounting.vw_eve_entries.entry_parent	accounting	vw_eve_entries	entry_parent	t	integer
+auth.bas_permissions.created_at	auth	bas_permissions	created_at	t	timestamp without time zone
+auth.bas_permissions.permission_id	auth	bas_permissions	permission_id	t	integer
+auth.bas_permissions.role_id	auth	bas_permissions	role_id	t	integer
+auth.bas_permissions.user_id	auth	bas_permissions	user_id	t	integer
+auth.bas_roles.description	auth	bas_roles	description	t	text
+auth.bas_roles.name	auth	bas_roles	name	t	text
+auth.bas_roles.role_id	auth	bas_roles	role_id	t	integer
+auth.bas_table_permissions.tpermission_id	auth	bas_table_permissions	tpermission_id	t	integer
+auth.bas_table_permissions.can_delete	auth	bas_table_permissions	can_delete	t	boolean
+auth.bas_table_permissions.can_read	auth	bas_table_permissions	can_read	t	boolean
+auth.bas_table_permissions.role_id	auth	bas_table_permissions	role_id	t	integer
+auth.bas_table_permissions.table_id	auth	bas_table_permissions	table_id	t	integer
+auth.bas_table_permissions.can_write	auth	bas_table_permissions	can_write	t	boolean
+auth.bas_tables.table_name	auth	bas_tables	table_name	t	character varying
+auth.bas_tables.table_id	auth	bas_tables	table_id	t	integer
+auth.bas_users.user_name	auth	bas_users	user_name	t	text
+auth.bas_users.user_id	auth	bas_users	user_id	t	integer
+auth.bas_users.email	auth	bas_users	email	t	character varying
+auth.bas_users.created_at	auth	bas_users	created_at	t	timestamp with time zone
+auth.bas_users.user_password	auth	bas_users	user_password	t	character varying
+auth.eve_access_tokens.token_id	auth	eve_access_tokens	token_id	t	integer
+auth.eve_access_tokens.user_id	auth	eve_access_tokens	user_id	t	integer
+auth.eve_access_tokens.token	auth	eve_access_tokens	token	t	character varying
+auth.eve_access_tokens.created_at	auth	eve_access_tokens	created_at	t	timestamp without time zone
+auth.eve_audit_log.created_at	auth	eve_audit_log	created_at	t	timestamp without time zone
+auth.eve_audit_log.log_id	auth	eve_audit_log	log_id	t	integer
+auth.eve_audit_log.user_id	auth	eve_audit_log	user_id	t	integer
+auth.eve_audit_log.activity	auth	eve_audit_log	activity	t	text
+auth.eve_refresh_tokens.created_at	auth	eve_refresh_tokens	created_at	t	timestamp without time zone
+auth.eve_refresh_tokens.user_id	auth	eve_refresh_tokens	user_id	t	integer
+auth.eve_refresh_tokens.rtoken_id	auth	eve_refresh_tokens	rtoken_id	t	integer
+auth.eve_refresh_tokens.token	auth	eve_refresh_tokens	token	t	character varying
+entities.bas_entities.email	entities	bas_entities	email	t	character varying
+entities.bas_entities.entity_password	entities	bas_entities	entity_password	t	character varying
+entities.bas_entities.entity_parent	entities	bas_entities	entity_parent	t	bigint
+entities.bas_entities.entity_id	entities	bas_entities	entity_id	t	integer
+entities.bas_entities.created_at	entities	bas_entities	created_at	t	timestamp with time zone
+entities.bas_entities.entity_name	entities	bas_entities	entity_name	t	text
+syslogic.bas_all_columns.data_type	syslogic	bas_all_columns	data_type	t	text
+syslogic.bas_all_columns.sch_name	syslogic	bas_all_columns	sch_name	t	text
+syslogic.bas_all_columns.show_front_end	syslogic	bas_all_columns	show_front_end	t	boolean
+syslogic.bas_all_columns.text_id	syslogic	bas_all_columns	text_id	t	text
+syslogic.bas_all_columns.tab_name	syslogic	bas_all_columns	tab_name	t	text
+syslogic.bas_all_columns.col_name	syslogic	bas_all_columns	col_name	t	text
+syslogic.bas_data_dic.def_class	syslogic	bas_data_dic	def_class	t	numeric
+syslogic.bas_data_dic.def_id	syslogic	bas_data_dic	def_id	t	integer
+syslogic.bas_data_dic.def_name	syslogic	bas_data_dic	def_name	t	text
+syslogic.bas_data_dic.col_id	syslogic	bas_data_dic	col_id	t	text
+syslogic.bas_data_dic.en_us	syslogic	bas_data_dic	en_us	t	text
+syslogic.bas_data_dic.teste	syslogic	bas_data_dic	teste	t	text
+syslogic.bas_data_dic.pt_br	syslogic	bas_data_dic	pt_br	t	text
+syslogic.bas_data_dic_class.class_name	syslogic	bas_data_dic_class	class_name	t	text
+syslogic.bas_data_dic_class.class_id	syslogic	bas_data_dic_class	class_id	t	integer
+syslogic.bas_data_dic_lang.lang_id	syslogic	bas_data_dic_lang	lang_id	t	integer
+syslogic.bas_data_dic_lang.lang_name	syslogic	bas_data_dic_lang	lang_name	t	text
+syslogic.bas_data_dic_lang.lang_code	syslogic	bas_data_dic_lang	lang_code	t	text
 \.
 
 
 --
--- TOC entry 3699 (class 0 OID 29019)
+-- TOC entry 3708 (class 0 OID 29019)
 -- Dependencies: 243
 -- Data for Name: bas_data_dic; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
 
-COPY syslogic.bas_data_dic (def_id, def_name, def_class, col_id, en_us, pt_br) FROM stdin;
-207	\N	\N	auth.bas_permissions.created_at	created_at	created_at
-208	\N	\N	auth.bas_permissions.permission_id	permission_id	permission_id
-209	\N	\N	auth.bas_permissions.role_id	role_id	role_id
-210	\N	\N	auth.bas_permissions.user_id	user_id	user_id
-211	\N	\N	auth.bas_roles.name	name	name
-212	\N	\N	auth.bas_roles.role_id	role_id	role_id
-213	\N	\N	auth.bas_roles.description	description	description
-214	\N	\N	auth.bas_table_permissions.role_id	role_id	role_id
-215	\N	\N	auth.bas_table_permissions.tpermission_id	tpermission_id	tpermission_id
-216	\N	\N	auth.bas_table_permissions.table_id	table_id	table_id
-217	\N	\N	auth.bas_table_permissions.can_write	can_write	can_write
-218	\N	\N	auth.bas_table_permissions.can_read	can_read	can_read
-219	\N	\N	auth.bas_table_permissions.can_delete	can_delete	can_delete
-220	\N	\N	auth.bas_tables.table_name	table_name	table_name
-221	\N	\N	auth.bas_tables.table_id	table_id	table_id
-222	\N	\N	auth.bas_users.email	email	email
-223	\N	\N	auth.bas_users.user_name	user_name	user_name
-224	\N	\N	auth.bas_users.created_at	created_at	created_at
-225	\N	\N	auth.bas_users.user_id	user_id	user_id
-226	\N	\N	auth.bas_users.user_password	user_password	user_password
-227	\N	\N	auth.eve_access_tokens.token	token	token
-228	\N	\N	auth.eve_access_tokens.user_id	user_id	user_id
-229	\N	\N	auth.eve_access_tokens.token_id	token_id	token_id
-230	\N	\N	auth.eve_access_tokens.created_at	created_at	created_at
-231	\N	\N	auth.eve_audit_log.activity	activity	activity
-232	\N	\N	auth.eve_audit_log.log_id	log_id	log_id
-233	\N	\N	auth.eve_audit_log.user_id	user_id	user_id
-234	\N	\N	auth.eve_audit_log.created_at	created_at	created_at
-235	\N	\N	auth.eve_refresh_tokens.token	token	token
-236	\N	\N	auth.eve_refresh_tokens.rtoken_id	rtoken_id	rtoken_id
-237	\N	\N	auth.eve_refresh_tokens.created_at	created_at	created_at
-238	\N	\N	auth.eve_refresh_tokens.user_id	user_id	user_id
-239	\N	\N	entities.bas_entities.entity_id	entity_id	entity_id
-240	\N	\N	entities.bas_entities.email	email	email
-241	\N	\N	entities.bas_entities.created_at	created_at	created_at
-242	\N	\N	entities.bas_entities.entity_parent	entity_parent	entity_parent
-243	\N	\N	entities.bas_entities.entity_password	entity_password	entity_password
-244	\N	\N	entities.bas_entities.entity_name	entity_name	entity_name
-245	\N	\N	syslogic.bas_all_columns.text_id	text_id	text_id
-246	\N	\N	syslogic.bas_all_columns.show_front_end	show_front_end	show_front_end
-247	\N	\N	syslogic.bas_all_columns.tab_name	tab_name	tab_name
-248	\N	\N	syslogic.bas_all_columns.col_name	col_name	col_name
-249	\N	\N	syslogic.bas_all_columns.sch_name	sch_name	sch_name
-250	\N	\N	syslogic.bas_data_dic.en_us	en_us	en_us
-252	\N	\N	syslogic.bas_data_dic.def_id	def_id	def_id
-253	\N	\N	syslogic.bas_data_dic.def_class	def_class	def_class
-254	\N	\N	syslogic.bas_data_dic.def_name	def_name	def_name
-255	\N	\N	syslogic.bas_data_dic.pt_br	pt_br	pt_br
-256	\N	\N	syslogic.bas_data_dic.col_id	col_id	col_id
-257	\N	\N	syslogic.bas_data_dic_class.class_id	class_id	class_id
-258	\N	\N	syslogic.bas_data_dic_class.class_name	class_name	class_name
-259	\N	\N	syslogic.bas_data_dic_lang.lang_code	lang_code	lang_code
-260	\N	\N	syslogic.bas_data_dic_lang.lang_name	lang_name	lang_name
-261	\N	\N	syslogic.bas_data_dic_lang.lang_id	lang_id	lang_id
-177	\N	\N	accounting.bas_acc_chart.balance	balance	Saldo
-194	\N	\N	accounting.eve_entries.balance	Balance	Saldo
-195	\N	\N	accounting.eve_entries.user_id	User	Usuário
-196	\N	\N	accounting.vw_eve_entries.user_id	User	Usuário
-197	\N	\N	accounting.vw_eve_entries.balance	Balance	Saldo
-198	\N	\N	accounting.vw_eve_entries.entity_id	Entity	Entidade
-199	\N	\N	accounting.vw_eve_entries.memo	Memo	Memo
-200	\N	\N	accounting.vw_eve_entries.credit	Credit	Crédito
-201	\N	\N	accounting.vw_eve_entries.occur_date	Occurrence	Ocorrência
-202	\N	\N	accounting.vw_eve_entries.entry_date	Date	Registro
-203	\N	\N	accounting.vw_eve_entries.debit	Debit	Débito
-204	\N	\N	accounting.vw_eve_entries.acc_id	Account	Conta
-205	\N	\N	accounting.vw_eve_entries.entry_parent	Source	Origem
-206	\N	\N	accounting.vw_eve_entries.entry_id	Entry Id	Código
-178	\N	\N	accounting.bas_acc_chart.inactive	inactive	Inativa
-179	\N	\N	accounting.bas_acc_chart.acc_order	acc_order	Ordem
-180	\N	\N	accounting.bas_acc_chart.acc_name	acc_name	Nome da Conta
-181	\N	\N	accounting.bas_acc_chart.init_balance	init_balance	Saldo Inicial
-182	\N	\N	accounting.bas_acc_chart.acc_id	acc_id	Id da Conta
-183	\N	\N	accounting.bas_acc_chart.acc_parent	acc_parent	Conta Pai
-184	\N	\N	accounting.bas_acc_chart.acc_path	acc_path	Cód. Conta
-185	\N	\N	accounting.eve_entries.credit	Credit	Crédito
-186	\N	\N	accounting.eve_entries.entry_id	Entry Id	Nº do Reg
-187	\N	\N	accounting.eve_entries.acc_id	Account	Conta
-188	\N	\N	accounting.eve_entries.entity_id	Entity	Entidade
-189	\N	\N	accounting.eve_entries.entry_parent	Source	Origem
-190	\N	\N	accounting.eve_entries.occur_date	Occurrence	Ocorrência
-191	\N	\N	accounting.eve_entries.entry_date	Entry Date	Entrada
-192	\N	\N	accounting.eve_entries.memo	Memo	Memo
-193	\N	\N	accounting.eve_entries.debit	Debit	Débito
+COPY syslogic.bas_data_dic (def_id, def_name, def_class, col_id, en_us, pt_br, teste) FROM stdin;
+264	Column accounting.bas_acc_chart.acc_id	1	accounting.bas_acc_chart.acc_id	acc_id	acc_id	\N
+265	Column accounting.bas_acc_chart.init_balance	1	accounting.bas_acc_chart.init_balance	init_balance	init_balance	\N
+266	Column accounting.bas_acc_chart.acc_name	1	accounting.bas_acc_chart.acc_name	acc_name	acc_name	\N
+267	Column accounting.bas_acc_chart.acc_parent	1	accounting.bas_acc_chart.acc_parent	acc_parent	acc_parent	\N
+268	Column accounting.bas_acc_chart.inactive	1	accounting.bas_acc_chart.inactive	inactive	inactive	\N
+269	Column accounting.bas_acc_chart.acc_order	1	accounting.bas_acc_chart.acc_order	acc_order	acc_order	\N
+270	Column accounting.bas_acc_chart.balance	1	accounting.bas_acc_chart.balance	balance	balance	\N
+271	Column accounting.bas_acc_chart.acc_path	1	accounting.bas_acc_chart.acc_path	acc_path	acc_path	\N
+272	Column accounting.eve_entries.entry_date	1	accounting.eve_entries.entry_date	entry_date	entry_date	\N
+273	Column accounting.eve_entries.entity_id	1	accounting.eve_entries.entity_id	entity_id	entity_id	\N
+274	Column accounting.eve_entries.memo	1	accounting.eve_entries.memo	memo	memo	\N
+275	Column accounting.eve_entries.credit	1	accounting.eve_entries.credit	credit	credit	\N
+276	Column accounting.eve_entries.debit	1	accounting.eve_entries.debit	debit	debit	\N
+277	Column accounting.eve_entries.entry_parent	1	accounting.eve_entries.entry_parent	entry_parent	entry_parent	\N
+278	Column accounting.eve_entries.balance	1	accounting.eve_entries.balance	balance	balance	\N
+279	Column accounting.eve_entries.entry_id	1	accounting.eve_entries.entry_id	entry_id	entry_id	\N
+280	Column accounting.eve_entries.occur_date	1	accounting.eve_entries.occur_date	occur_date	occur_date	\N
+281	Column accounting.eve_entries.acc_id	1	accounting.eve_entries.acc_id	acc_id	acc_id	\N
+282	Column accounting.eve_entries.user_id	1	accounting.eve_entries.user_id	user_id	user_id	\N
+283	Column accounting.vw_eve_entries.acc_id	1	accounting.vw_eve_entries.acc_id	acc_id	acc_id	\N
+284	Column accounting.vw_eve_entries.credit	1	accounting.vw_eve_entries.credit	credit	credit	\N
+285	Column accounting.vw_eve_entries.entry_date	1	accounting.vw_eve_entries.entry_date	entry_date	entry_date	\N
+286	Column accounting.vw_eve_entries.entity_id	1	accounting.vw_eve_entries.entity_id	entity_id	entity_id	\N
+287	Column accounting.vw_eve_entries.occur_date	1	accounting.vw_eve_entries.occur_date	occur_date	occur_date	\N
+289	Column accounting.vw_eve_entries.debit	1	accounting.vw_eve_entries.debit	debit	debit	\N
+290	Column accounting.vw_eve_entries.balance	1	accounting.vw_eve_entries.balance	balance	balance	\N
+291	Column accounting.vw_eve_entries.entry_id	1	accounting.vw_eve_entries.entry_id	entry_id	entry_id	\N
+292	Column accounting.vw_eve_entries.user_id	1	accounting.vw_eve_entries.user_id	user_id	user_id	\N
+293	Column accounting.vw_eve_entries.entry_parent	1	accounting.vw_eve_entries.entry_parent	entry_parent	entry_parent	\N
+294	Column auth.bas_permissions.created_at	1	auth.bas_permissions.created_at	created_at	created_at	\N
+295	Column auth.bas_permissions.permission_id	1	auth.bas_permissions.permission_id	permission_id	permission_id	\N
+296	Column auth.bas_permissions.role_id	1	auth.bas_permissions.role_id	role_id	role_id	\N
+297	Column auth.bas_permissions.user_id	1	auth.bas_permissions.user_id	user_id	user_id	\N
+298	Column auth.bas_roles.description	1	auth.bas_roles.description	description	description	\N
+299	Column auth.bas_roles.name	1	auth.bas_roles.name	name	name	\N
+300	Column auth.bas_roles.role_id	1	auth.bas_roles.role_id	role_id	role_id	\N
+301	Column auth.bas_table_permissions.tpermission_id	1	auth.bas_table_permissions.tpermission_id	tpermission_id	tpermission_id	\N
+302	Column auth.bas_table_permissions.can_delete	1	auth.bas_table_permissions.can_delete	can_delete	can_delete	\N
+303	Column auth.bas_table_permissions.can_read	1	auth.bas_table_permissions.can_read	can_read	can_read	\N
+304	Column auth.bas_table_permissions.role_id	1	auth.bas_table_permissions.role_id	role_id	role_id	\N
+305	Column auth.bas_table_permissions.table_id	1	auth.bas_table_permissions.table_id	table_id	table_id	\N
+306	Column auth.bas_table_permissions.can_write	1	auth.bas_table_permissions.can_write	can_write	can_write	\N
+307	Column auth.bas_tables.table_name	1	auth.bas_tables.table_name	table_name	table_name	\N
+308	Column auth.bas_tables.table_id	1	auth.bas_tables.table_id	table_id	table_id	\N
+309	Column auth.bas_users.user_name	1	auth.bas_users.user_name	user_name	user_name	\N
+310	Column auth.bas_users.user_id	1	auth.bas_users.user_id	user_id	user_id	\N
+311	Column auth.bas_users.email	1	auth.bas_users.email	email	email	\N
+312	Column auth.bas_users.created_at	1	auth.bas_users.created_at	created_at	created_at	\N
+313	Column auth.bas_users.user_password	1	auth.bas_users.user_password	user_password	user_password	\N
+314	Column auth.eve_access_tokens.token_id	1	auth.eve_access_tokens.token_id	token_id	token_id	\N
+315	Column auth.eve_access_tokens.user_id	1	auth.eve_access_tokens.user_id	user_id	user_id	\N
+316	Column auth.eve_access_tokens.token	1	auth.eve_access_tokens.token	token	token	\N
+317	Column auth.eve_access_tokens.created_at	1	auth.eve_access_tokens.created_at	created_at	created_at	\N
+318	Column auth.eve_audit_log.created_at	1	auth.eve_audit_log.created_at	created_at	created_at	\N
+319	Column auth.eve_audit_log.log_id	1	auth.eve_audit_log.log_id	log_id	log_id	\N
+320	Column auth.eve_audit_log.user_id	1	auth.eve_audit_log.user_id	user_id	user_id	\N
+321	Column auth.eve_audit_log.activity	1	auth.eve_audit_log.activity	activity	activity	\N
+322	Column auth.eve_refresh_tokens.created_at	1	auth.eve_refresh_tokens.created_at	created_at	created_at	\N
+323	Column auth.eve_refresh_tokens.user_id	1	auth.eve_refresh_tokens.user_id	user_id	user_id	\N
+324	Column auth.eve_refresh_tokens.rtoken_id	1	auth.eve_refresh_tokens.rtoken_id	rtoken_id	rtoken_id	\N
+325	Column auth.eve_refresh_tokens.token	1	auth.eve_refresh_tokens.token	token	token	\N
+326	Column entities.bas_entities.email	1	entities.bas_entities.email	email	email	\N
+327	Column entities.bas_entities.entity_password	1	entities.bas_entities.entity_password	entity_password	entity_password	\N
+328	Column entities.bas_entities.entity_parent	1	entities.bas_entities.entity_parent	entity_parent	entity_parent	\N
+329	Column entities.bas_entities.entity_id	1	entities.bas_entities.entity_id	entity_id	entity_id	\N
+330	Column entities.bas_entities.created_at	1	entities.bas_entities.created_at	created_at	created_at	\N
+331	Column entities.bas_entities.entity_name	1	entities.bas_entities.entity_name	entity_name	entity_name	\N
+332	Column syslogic.bas_all_columns.data_type	1	syslogic.bas_all_columns.data_type	data_type	data_type	\N
+333	Column syslogic.bas_all_columns.sch_name	1	syslogic.bas_all_columns.sch_name	sch_name	sch_name	\N
+334	Column syslogic.bas_all_columns.show_front_end	1	syslogic.bas_all_columns.show_front_end	show_front_end	show_front_end	\N
+335	Column syslogic.bas_all_columns.text_id	1	syslogic.bas_all_columns.text_id	text_id	text_id	\N
+336	Column syslogic.bas_all_columns.tab_name	1	syslogic.bas_all_columns.tab_name	tab_name	tab_name	\N
+337	Column syslogic.bas_all_columns.col_name	1	syslogic.bas_all_columns.col_name	col_name	col_name	\N
+338	Column syslogic.bas_data_dic.def_class	1	syslogic.bas_data_dic.def_class	def_class	def_class	\N
+339	Column syslogic.bas_data_dic.def_id	1	syslogic.bas_data_dic.def_id	def_id	def_id	\N
+340	Column syslogic.bas_data_dic.def_name	1	syslogic.bas_data_dic.def_name	def_name	def_name	\N
+341	Column syslogic.bas_data_dic.col_id	1	syslogic.bas_data_dic.col_id	col_id	col_id	\N
+342	Column syslogic.bas_data_dic.en_us	1	syslogic.bas_data_dic.en_us	en_us	en_us	\N
+343	Column syslogic.bas_data_dic.teste	1	syslogic.bas_data_dic.teste	teste	teste	\N
+344	Column syslogic.bas_data_dic.pt_br	1	syslogic.bas_data_dic.pt_br	pt_br	pt_br	\N
+345	Column syslogic.bas_data_dic_class.class_name	1	syslogic.bas_data_dic_class.class_name	class_name	class_name	\N
+346	Column syslogic.bas_data_dic_class.class_id	1	syslogic.bas_data_dic_class.class_id	class_id	class_id	\N
+347	Column syslogic.bas_data_dic_lang.lang_id	1	syslogic.bas_data_dic_lang.lang_id	lang_id	lang_id	\N
+348	Column syslogic.bas_data_dic_lang.lang_name	1	syslogic.bas_data_dic_lang.lang_name	lang_name	lang_name	\N
+349	Column syslogic.bas_data_dic_lang.lang_code	1	syslogic.bas_data_dic_lang.lang_code	lang_code	lang_code	\N
+288	Column accounting.vw_eve_entries.memo	1	accounting.vw_eve_entries.memo	maluco	memo	\N
 \.
 
 
 --
--- TOC entry 3700 (class 0 OID 29025)
+-- TOC entry 3709 (class 0 OID 29025)
 -- Dependencies: 244
 -- Data for Name: bas_data_dic_class; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
@@ -31256,7 +31301,7 @@ COPY syslogic.bas_data_dic_class (class_id, class_name) FROM stdin;
 
 
 --
--- TOC entry 3703 (class 0 OID 29032)
+-- TOC entry 3712 (class 0 OID 29032)
 -- Dependencies: 247
 -- Data for Name: bas_data_dic_lang; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
@@ -31268,7 +31313,7 @@ COPY syslogic.bas_data_dic_lang (lang_id, lang_name, lang_code) FROM stdin;
 
 
 --
--- TOC entry 3736 (class 0 OID 0)
+-- TOC entry 3747 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE SET; Schema: accounting; Owner: derole
 --
@@ -31277,7 +31322,7 @@ SELECT pg_catalog.setval('accounting.bas_acc_chart_acc_id_seq', 2, true);
 
 
 --
--- TOC entry 3737 (class 0 OID 0)
+-- TOC entry 3748 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: eve_entries_entry_id_seq; Type: SEQUENCE SET; Schema: accounting; Owner: derole
 --
@@ -31286,7 +31331,7 @@ SELECT pg_catalog.setval('accounting.eve_entries_entry_id_seq', 29951, true);
 
 
 --
--- TOC entry 3738 (class 0 OID 0)
+-- TOC entry 3749 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31295,7 +31340,7 @@ SELECT pg_catalog.setval('auth.bas_permissions_permission_id_seq', 1, false);
 
 
 --
--- TOC entry 3739 (class 0 OID 0)
+-- TOC entry 3750 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31304,7 +31349,7 @@ SELECT pg_catalog.setval('auth.bas_roles_role_id_seq', 1, false);
 
 
 --
--- TOC entry 3740 (class 0 OID 0)
+-- TOC entry 3751 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31313,7 +31358,7 @@ SELECT pg_catalog.setval('auth.bas_table_permissions_tpermission_id_seq', 1, fal
 
 
 --
--- TOC entry 3741 (class 0 OID 0)
+-- TOC entry 3752 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31322,7 +31367,7 @@ SELECT pg_catalog.setval('auth.bas_tables_table_id_seq', 1, false);
 
 
 --
--- TOC entry 3742 (class 0 OID 0)
+-- TOC entry 3753 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: bas_users_user_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31331,7 +31376,7 @@ SELECT pg_catalog.setval('auth.bas_users_user_id_seq', 1, true);
 
 
 --
--- TOC entry 3743 (class 0 OID 0)
+-- TOC entry 3754 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31340,7 +31385,7 @@ SELECT pg_catalog.setval('auth.eve_access_tokens_token_id_seq', 1, false);
 
 
 --
--- TOC entry 3744 (class 0 OID 0)
+-- TOC entry 3755 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31349,7 +31394,7 @@ SELECT pg_catalog.setval('auth.eve_audit_log_log_id_seq', 1, false);
 
 
 --
--- TOC entry 3745 (class 0 OID 0)
+-- TOC entry 3756 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
@@ -31358,7 +31403,7 @@ SELECT pg_catalog.setval('auth.eve_refresh_tokens_rtoken_id_seq', 1, false);
 
 
 --
--- TOC entry 3746 (class 0 OID 0)
+-- TOC entry 3757 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE SET; Schema: entities; Owner: derole
 --
@@ -31367,7 +31412,16 @@ SELECT pg_catalog.setval('entities.bas_entities_entity_id_seq', 3, true);
 
 
 --
--- TOC entry 3747 (class 0 OID 0)
+-- TOC entry 3758 (class 0 OID 0)
+-- Dependencies: 249
+-- Name: todos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: derole
+--
+
+SELECT pg_catalog.setval('public.todos_id_seq', 20, true);
+
+
+--
+-- TOC entry 3759 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: bas_data_dic_class_class_id_seq; Type: SEQUENCE SET; Schema: syslogic; Owner: derole
 --
@@ -31376,16 +31430,16 @@ SELECT pg_catalog.setval('syslogic.bas_data_dic_class_class_id_seq', 1, true);
 
 
 --
--- TOC entry 3748 (class 0 OID 0)
+-- TOC entry 3760 (class 0 OID 0)
 -- Dependencies: 246
 -- Name: bas_data_dic_def_id_seq; Type: SEQUENCE SET; Schema: syslogic; Owner: derole
 --
 
-SELECT pg_catalog.setval('syslogic.bas_data_dic_def_id_seq', 262, true);
+SELECT pg_catalog.setval('syslogic.bas_data_dic_def_id_seq', 349, true);
 
 
 --
--- TOC entry 3749 (class 0 OID 0)
+-- TOC entry 3761 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: bas_data_dic_lang_lang_id_seq; Type: SEQUENCE SET; Schema: syslogic; Owner: derole
 --
@@ -31394,7 +31448,7 @@ SELECT pg_catalog.setval('syslogic.bas_data_dic_lang_lang_id_seq', 2, true);
 
 
 --
--- TOC entry 3494 (class 2606 OID 29053)
+-- TOC entry 3501 (class 2606 OID 29053)
 -- Name: bas_acc_chart bas_acc_chart_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -31403,7 +31457,7 @@ ALTER TABLE ONLY accounting.bas_acc_chart
 
 
 --
--- TOC entry 3496 (class 2606 OID 29055)
+-- TOC entry 3503 (class 2606 OID 29055)
 -- Name: eve_entries eve_entries_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -31412,7 +31466,7 @@ ALTER TABLE ONLY accounting.eve_entries
 
 
 --
--- TOC entry 3502 (class 2606 OID 29057)
+-- TOC entry 3509 (class 2606 OID 29057)
 -- Name: bas_permissions bas_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31421,7 +31475,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
--- TOC entry 3504 (class 2606 OID 29059)
+-- TOC entry 3511 (class 2606 OID 29059)
 -- Name: bas_roles bas_roles_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31430,7 +31484,7 @@ ALTER TABLE ONLY auth.bas_roles
 
 
 --
--- TOC entry 3506 (class 2606 OID 29061)
+-- TOC entry 3513 (class 2606 OID 29061)
 -- Name: bas_table_permissions bas_table_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31439,7 +31493,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3508 (class 2606 OID 29063)
+-- TOC entry 3515 (class 2606 OID 29063)
 -- Name: bas_tables bas_tables_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31448,7 +31502,7 @@ ALTER TABLE ONLY auth.bas_tables
 
 
 --
--- TOC entry 3498 (class 2606 OID 29065)
+-- TOC entry 3505 (class 2606 OID 29065)
 -- Name: bas_users bas_users_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31457,7 +31511,7 @@ ALTER TABLE ONLY auth.bas_users
 
 
 --
--- TOC entry 3510 (class 2606 OID 29067)
+-- TOC entry 3517 (class 2606 OID 29067)
 -- Name: eve_access_tokens eve_access_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31466,7 +31520,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
--- TOC entry 3512 (class 2606 OID 29069)
+-- TOC entry 3519 (class 2606 OID 29069)
 -- Name: eve_audit_log eve_audit_log_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31475,7 +31529,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
--- TOC entry 3514 (class 2606 OID 29071)
+-- TOC entry 3521 (class 2606 OID 29071)
 -- Name: eve_refresh_tokens eve_refresh_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31484,7 +31538,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
 
 
 --
--- TOC entry 3500 (class 2606 OID 29073)
+-- TOC entry 3507 (class 2606 OID 29073)
 -- Name: bas_entities bas_entities_pkey; Type: CONSTRAINT; Schema: entities; Owner: derole
 --
 
@@ -31493,7 +31547,16 @@ ALTER TABLE ONLY entities.bas_entities
 
 
 --
--- TOC entry 3516 (class 2606 OID 29075)
+-- TOC entry 3531 (class 2606 OID 29135)
+-- Name: todos todos_pkey; Type: CONSTRAINT; Schema: public; Owner: derole
+--
+
+ALTER TABLE ONLY public.todos
+    ADD CONSTRAINT todos_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3523 (class 2606 OID 29075)
 -- Name: bas_all_columns bas_all_columns_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -31502,7 +31565,7 @@ ALTER TABLE ONLY syslogic.bas_all_columns
 
 
 --
--- TOC entry 3520 (class 2606 OID 29077)
+-- TOC entry 3527 (class 2606 OID 29077)
 -- Name: bas_data_dic_class bas_data_dic_class_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -31511,7 +31574,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic_class
 
 
 --
--- TOC entry 3522 (class 2606 OID 29079)
+-- TOC entry 3529 (class 2606 OID 29079)
 -- Name: bas_data_dic_lang bas_data_dic_lang_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -31520,7 +31583,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic_lang
 
 
 --
--- TOC entry 3518 (class 2606 OID 29081)
+-- TOC entry 3525 (class 2606 OID 29081)
 -- Name: bas_data_dic bas_data_dic_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -31529,7 +31592,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic
 
 
 --
--- TOC entry 3531 (class 2620 OID 29127)
+-- TOC entry 3540 (class 2620 OID 29127)
 -- Name: bas_all_columns delete_bas_data_dic_trigger; Type: TRIGGER; Schema: syslogic; Owner: derole
 --
 
@@ -31537,7 +31600,7 @@ CREATE TRIGGER delete_bas_data_dic_trigger AFTER DELETE ON syslogic.bas_all_colu
 
 
 --
--- TOC entry 3532 (class 2620 OID 29125)
+-- TOC entry 3541 (class 2620 OID 29125)
 -- Name: bas_all_columns insert_bas_data_dic_trigger; Type: TRIGGER; Schema: syslogic; Owner: derole
 --
 
@@ -31545,7 +31608,7 @@ CREATE TRIGGER insert_bas_data_dic_trigger AFTER INSERT ON syslogic.bas_all_colu
 
 
 --
--- TOC entry 3523 (class 2606 OID 29082)
+-- TOC entry 3532 (class 2606 OID 29082)
 -- Name: eve_entries eve_entries_acc_id_fkey; Type: FK CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -31554,7 +31617,7 @@ ALTER TABLE ONLY accounting.eve_entries
 
 
 --
--- TOC entry 3524 (class 2606 OID 29087)
+-- TOC entry 3533 (class 2606 OID 29087)
 -- Name: bas_permissions bas_permissions_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31563,7 +31626,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
--- TOC entry 3525 (class 2606 OID 29092)
+-- TOC entry 3534 (class 2606 OID 29092)
 -- Name: bas_table_permissions bas_table_permissions_role_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31572,7 +31635,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3526 (class 2606 OID 29097)
+-- TOC entry 3535 (class 2606 OID 29097)
 -- Name: bas_table_permissions bas_table_permissions_table_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31581,7 +31644,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
--- TOC entry 3527 (class 2606 OID 29102)
+-- TOC entry 3536 (class 2606 OID 29102)
 -- Name: eve_access_tokens eve_access_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31590,7 +31653,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
--- TOC entry 3528 (class 2606 OID 29107)
+-- TOC entry 3537 (class 2606 OID 29107)
 -- Name: eve_audit_log eve_audit_log_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31599,7 +31662,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
--- TOC entry 3529 (class 2606 OID 29112)
+-- TOC entry 3538 (class 2606 OID 29112)
 -- Name: eve_refresh_tokens eve_refresh_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -31608,7 +31671,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
 
 
 --
--- TOC entry 3530 (class 2606 OID 29119)
+-- TOC entry 3539 (class 2606 OID 29119)
 -- Name: bas_data_dic bas_data_dic_col_id_fkey; Type: FK CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -31617,7 +31680,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic
 
 
 --
--- TOC entry 3711 (class 0 OID 0)
+-- TOC entry 3721 (class 0 OID 0)
 -- Dependencies: 10
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -31627,7 +31690,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
--- TOC entry 3463 (class 3466 OID 29117)
+-- TOC entry 3468 (class 3466 OID 29137)
 -- Name: sync_bas_all_columns_event; Type: EVENT TRIGGER; Schema: -; Owner: postgres
 --
 
@@ -31638,7 +31701,7 @@ CREATE EVENT TRIGGER sync_bas_all_columns_event ON ddl_command_end
 
 ALTER EVENT TRIGGER sync_bas_all_columns_event OWNER TO postgres;
 
--- Completed on 2023-07-15 21:03:51 -03
+-- Completed on 2023-07-27 16:15:20 -03
 
 --
 -- PostgreSQL database dump complete
