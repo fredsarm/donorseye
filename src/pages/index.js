@@ -1,33 +1,41 @@
-// src/pages/index.js
+import { useEffect, useState } from 'react';
+import EntriesTable from './accounting/EntriesTable';
 
-import Table from '../components/Table'; 
+const Home = () => {
+  const [data, setData] = useState([]);
+  const [dictData, setDictData] = useState({});
+  const [language, setLanguage] = useState({});
 
-const Home = ({ data, dictData }) => (
-  <div>
-    <Table data={data} dictData={dictData} />
-  </div>
-);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const pCols = 'entry_id,entry_date,occur_date,memo,debit,credit,balance,user_id,entry_parent,entity_id,acc_id';
+        const pWh = encodeURIComponent(JSON.stringify([{"col":"entry_id","comparisonOperator":"<","value":"30000"}]));
+        const pOb = encodeURIComponent(JSON.stringify([{"col":"entry_id","direction":"ASC"},{"col":"entry_date","direction":"ASC"}]));
+        const language = 'pt_br';
+        let userLocale = navigator.language || navigator.userLanguage; // pega o idioma do navegador
+console.log(userLocale);
+        const res = await fetch(`http://localhost:3000/api/entries?pCols=${pCols}&pWh=${pWh}&pOb=${pOb}&language=${language}&userLocale=${userLocale}`);
+        const result = await res.json();
+        setData(result.data);
+        setLanguage(language);
+        setDictData(result.dictData.reduce((acc, cur) => {
+          acc[cur.col_name] = cur[language];
+          return acc;
+        }, {}));
+      } catch(error) {
+        console.log(error);
+      }
+    };
 
-Home.getInitialProps = async () => {
-  let data = [];
-  let dictData = {};
-  try {
-    const pCols = 'entry_id,entry_date,memo,debit,credit';
-    // const pWh = encodeURIComponent(JSON.stringify([{"col":"entry_id","comparisonOperator":"<","value":"30000"},{"logicOperator":"AND","col":"memo","comparisonOperator":"<>","value":"reembolso"}]));
-    const pWh = encodeURIComponent(JSON.stringify([{"col":"entry_id","comparisonOperator":"<","value":"3000"}]));
-    const pOb = encodeURIComponent(JSON.stringify([{"col":"entry_id","direction":"ASC"},{"col":"entry_date","direction":"ASC"}]));
-    const language = 'en_us';
-    const res = await fetch(`http://localhost:3000/api/entries?pCols=${pCols}&pWh=${pWh}&pOb=${pOb}&language=${language}`);
-    const result = await res.json();
-    data = result.data;
-    dictData = result.dictData.reduce((acc, cur) => {
-       acc[cur.col_name] = cur[language];
-       return acc;
-     }, {});
-  } catch(error) {
-    console.log(error);
-  }
-  return { data, dictData };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <EntriesTable data={data} dictData={dictData} language={language}/>
+    </div>
+  );
 };
 
 export default Home;
