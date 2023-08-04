@@ -1,9 +1,8 @@
-// src/pages/api/entries.js
+// src/pages/queries/singleQuery.js
 const accountingConn = require ('../../connections/accountingConn');
-const schemaName = 'accounting';
-const tableName = 'vw_eve_entries';
 
-export default async (req, res) => { // next.js will import it
+const singleQuery = async function (req, res, schemaName,tableName)  {
+  
   try {
 
     let { pCols , pWh , pOb, language } = req.query;
@@ -30,20 +29,9 @@ export default async (req, res) => { // next.js will import it
     ON dic.col_id = col.text_id \
     WHERE col.sch_name = $1 AND col.tab_name = $2 AND col.show_front_end = $3\
     ', [schemaName, tableName, true]);
-    const allowedColumns = [
-      'entry_id',     
-      'entry_parent', 
-      'acc_id',
-      'entity_id',
-      'entry_date',
-      'occur_date',   
-      'memo',
-      'credit',       
-      'debit',
-      'balance',
-      'user_id'      
-    ]
-
+    const allowedColumnsResult = await accountingConn.any('SELECT col.col_name, dic.' + language + ' FROM syslogic.bas_data_dic AS dic JOIN syslogic.bas_all_columns AS col ON dic.col_id = col.text_id WHERE col.sch_name = $1 AND col.tab_name = $2 AND col.show_front_end = $3', [schemaName, tableName, true]);
+    // Create the variable to be used for checking if the columns passed as arguments with the URL is available
+    const allowedColumns = allowedColumnsResult.map(obj => obj.col_name);
     const allowedCompOps = ['=', '>', '<', '<>','<=','>=','ILIKE','NOT ILIKE'];
     const allowedLogOps = ['AND','OR','NOT'];
     const allowedDirs = ['ASC', 'DESC'];
@@ -172,3 +160,5 @@ export default async (req, res) => { // next.js will import it
       const pOb = encodeURIComponent(JSON.stringify([{"col":"entry_date","direction":"DESC"},{"col":"entry_id","direction":"DESC"}]));
       const language = 'en_us';
   */
+
+module.exports = singleQuery;

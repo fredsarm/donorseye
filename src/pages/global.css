@@ -1,0 +1,9 @@
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ant-table-thead > tr > th { /* Conforme ChatGpt, é o único meio de centralizar os títulos das colunas */
+  text-align: center !important;
+  color: rgb(209, 211, 212);
+}
