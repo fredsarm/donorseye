@@ -16,7 +16,7 @@ const AccEntriesTable = () => {
     const fetchData = async () => {
       try {
         const pWh = encodeURIComponent(JSON.stringify([{"col":"acc_id","comparisonOperator":">","value":"0"}]));
-        const language = 'pt_br';
+        const language = 'en_us';
         let userLocale = navigator.language || navigator.userLanguage;
         const res = await fetch(`http://localhost:3000/api/acc_entries?pWh=${pWh}&language=${language}&userLocale=${userLocale}`);
         const resJson = await res.json();
@@ -106,7 +106,7 @@ const AccEntriesTable = () => {
         compare: (a, b) => Number(a.credit) - Number(b.credit),
         multiple:0,
       },
-      render: (text, record) => Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right'
     },
     'debit': { 
@@ -115,7 +115,7 @@ const AccEntriesTable = () => {
         compare: (a, b) => Number(a.debit) - Number(b.debit),
         multiple:0
       },
-      render: (text, record) => Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right'
     },
     'entity_id': {
@@ -150,7 +150,7 @@ const AccEntriesTable = () => {
     },
     'credit': { 
       dataIndex: 'credit', 
-      render: (text, record) => Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
       width: '20%',
       sorter: (a, b) => Number(a.credit) - Number(b.credit),
@@ -158,7 +158,7 @@ const AccEntriesTable = () => {
     },
     'debit': { 
       dataIndex: 'debit', 
-      render: (text, record) => Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
       width: '20%'
     },
