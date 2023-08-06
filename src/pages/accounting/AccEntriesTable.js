@@ -153,8 +153,6 @@ const AccEntriesTable = () => {
       render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
       width: '20%',
-      sorter: (a, b) => Number(a.credit) - Number(b.credit),
-      defaultSortOrder: 'descend',
     },
     'debit': { 
       dataIndex: 'debit', 

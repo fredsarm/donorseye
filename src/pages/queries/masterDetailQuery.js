@@ -116,7 +116,7 @@ const masterDetailQuery = async function (req, res, schemaName,tableName)  {
       transIDs = Array.from(transIDs);
       console.log(transIDs);
   
-      const child = await accountingConn.any(`SELECT ${columns} FROM ${schemaName}.${tableName} WHERE parent_id IN (${transIDs})`);
+      const child = await accountingConn.any(`SELECT ${columns} FROM ${schemaName}.${tableName} WHERE parent_id IN (${transIDs}) ORDER BY credit DESC`);
       console.log(child);
   
       // Return the result and the dictionary for the table columns
