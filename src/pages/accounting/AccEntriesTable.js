@@ -16,7 +16,7 @@ const AccEntriesTable = () => {
     const fetchData = async () => {
       try {
         const pWh = encodeURIComponent(JSON.stringify([{"col":"acc_id","comparisonOperator":">","value":"0"}]));
-        const language = 'en_us';
+        const language = 'pt_br';
         let userLocale = navigator.language || navigator.userLanguage;
         const res = await fetch(`http://localhost:3000/api/acc_entries?pWh=${pWh}&language=${language}&userLocale=${userLocale}`);
         const resJson = await res.json();
@@ -150,13 +150,13 @@ const AccEntriesTable = () => {
     },
     'credit': { 
       dataIndex: 'credit', 
-      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : columnsAndLabels['credit'].toLocaleString(language.replace("_", "-")) + ': ' + Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
       width: '20%',
     },
     'debit': { 
       dataIndex: 'debit', 
-      render: (text, record) => Number(text) === 0 ? '' : Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
+      render: (text, record) => Number(text) === 0 ? '' : columnsAndLabels['debit'].toLocaleString(language.replace("_", "-")) + ': ' + Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
       width: '20%'
     },
@@ -202,6 +202,7 @@ console.log(data);
                 backgroundColor: 'rgb(239, 239, 239)'
                 }}>
                 <Table
+                  id="accounting-entries" 
                   style={{ padding: '0px' }}
                   columns={nestedColumns}
                   dataSource={nestedData} 

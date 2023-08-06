@@ -7,3 +7,7 @@ body {
   text-align: center !important;
   color: rgb(209, 211, 212);
 }
+
+#accounting-entries .ant-table-thead {
+  display: none;
+}
