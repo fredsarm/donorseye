@@ -152,7 +152,9 @@ const AccEntriesTable = () => {
       dataIndex: 'credit', 
       render: (text, record) => Number(text).toLocaleString(language.replace("_", "-"), { minimumFractionDigits: 2 }),
       align: 'right',
-    width: '20%',
+      width: '20%',
+      sorter: (a, b) => Number(a.credit) - Number(b.credit),
+      defaultSortOrder: 'descend',
     },
     'debit': { 
       dataIndex: 'debit', 
@@ -180,7 +182,7 @@ console.log(data);
   })).filter(column => column.show !== false);
 
   return (
-    <ConfigProvider locale={getLocale}>
+    <ConfigProvider locale={getLocale()}>
       <Table 
         columns={columns}
         dataSource={data} 
