@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a Next.js project bootstrapped with create-next-app. This project serves as a study in which I'm exploring various technology options that can be used for the creation of enterprise systems leveraging the JavaScript environment.
 
-## Getting Started
+**Technologies Used:**
 
-First, run the development server:
+- Node.js
+- PostgreSQL
+- JavaScript
+- pg-promise
+- Next.js
+- React
+- [Ant Design](https://ant.design/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+**Getting Started**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Clone the repository.
+- Navigate to the project directory and run:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+``````bash
+ npm install
+``````
+- Install PostgreSQL.
+- While logged in as an administrative user (usually 'postgres'):
+  - Create the role 'derole', set the password as indicated in the accountingConn.js file.
+  - Create the 'de' database and assign its ownership to the 'derole' user.
+  - Restore the backup from the file located at /dbackup/db/sql.
+- In the project directory, run:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+``````bash
+ npm run dev
+``````
+- Open http://localhost:3000 with your browser to see the result.
+- Make me happy with a feedback! 🙏🏻
