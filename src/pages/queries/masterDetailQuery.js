@@ -102,33 +102,20 @@ const masterDetailQuery = async function (req, res, schemaName,tableName)  {
     
       // Execute the query
       const data = await accountingConn.any(query,values);
-      console.log(data);
-  
       let transIDs = data.map(trans => trans.parent_id.toString());
-      console.log(transIDs);
-  
       // Converte o array para um Set para remover duplicatas
       transIDs = new Set(transIDs);
-      console.log(transIDs);
-  
       // Converte o Set de volta para um array
-  
       transIDs = Array.from(transIDs);
-      console.log(transIDs);
   
       const child = await accountingConn.any(`SELECT ${columns} FROM ${schemaName}.${tableName} WHERE parent_id IN (${transIDs}) ORDER BY credit DESC`);
-      console.log(child);
   
-      // Return the result and the dictionary for the table columns
+      // Return the result, the dictionary and the child records
       const result = {
           'data': data,
           'columnsAndLabels':columnsAndLabels,
           'child':child
         };
-  
-        console.log(result.data.parent_id);
-        console.log(result.data.parent_id);
-         console.log(result.columnsAndLabels);
   
         res.json(result);
       } catch (err) {
