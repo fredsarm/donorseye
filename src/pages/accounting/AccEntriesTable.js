@@ -199,11 +199,10 @@ console.log(data);
               <div style={{ 
                 maxWidth: '50%',
                 padding: '15px',
-                backgroundColor: 'rgb(239, 239, 239)'
+                margin: '0%',
                 }}>
                 <Table
                   id="accounting-entries" 
-                  style={{ padding: '0px' }}
                   columns={nestedColumns}
                   dataSource={nestedData} 
                   rowKey='entry_id' 
