@@ -242,9 +242,9 @@ const AccEntriesTable = () => {
               <div style={{ padding: 8 }}>
                 <DatePicker
                   placeholder={`${getLocale().Table.filterTitle} ${column.title}`}
-                  value={selectedKeys[0] ? moment(selectedKeys[0], 'YYYY-MM-DD') : null}
+                  // value={selectedKeys[0] ? moment(selectedKeys[0], 'YYYY-MM-DD') : null}
                   onChange={e => setSelectedKeys(e ? [e.format('YYYY-MM-DD')] : [])}
-                  format='YYYY-MM-DD'
+                  format='DD/MM/YYYY'
                   onPressEnter={() => confirm()}
                   style={{ width: 188, marginBottom: 8, display: 'block' }}
                 />
@@ -298,10 +298,12 @@ const AccEntriesTable = () => {
         dataSource={data}
         rowKey='entry_id'
         pagination={{
-          position: ['bottomCenter'],
+          position: ['topCenter'],
           showSizeChanger: true,
+          pageSize: 200,
           pageSizeOptions: ['200', '500' , '1000' , '2000']
         }}
+        scroll={{ y: 900 }}
         bordered
         size='small'
         expandable={{
