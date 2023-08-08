@@ -118,8 +118,8 @@ const AccEntriesTable = () => {
       // show: false,
 
     },
-    'acc_name': {
-      dataIndex: 'acc_name',
+    'path': {
+      dataIndex: 'path',
       align: 'left',
       width: '60%',
     },
@@ -138,7 +138,7 @@ const AccEntriesTable = () => {
   };
 
   const columnOrder = ['parent_id','trans_date', 'occur_date', 'memo','entity_name','acc_name', 'acc_id', 'entity_id', 'credit', 'debit'];
-  const nestedColumnOrder = ['acc_name','credit', 'debit'];
+  const nestedColumnOrder = ['path','credit', 'debit'];
 
   if (Object.keys(columnsAndLabels).length === 0) {
     return null;
@@ -300,10 +300,10 @@ const AccEntriesTable = () => {
         pagination={{
           position: ['topCenter'],
           showSizeChanger: true,
-          pageSize: 200,
+          // pageSize: 200,
           pageSizeOptions: ['200', '500' , '1000' , '2000']
         }}
-        scroll={{ y: 900 }}
+        scroll={{ y: 800 }}
         bordered
         size='small'
         expandable={{
