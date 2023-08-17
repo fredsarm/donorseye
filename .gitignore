@@ -33,3 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+Texto para Commit.md
+kate-swp
+.vscode
+.gitignore
+.gitignore
