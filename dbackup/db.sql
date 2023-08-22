@@ -2,8 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
--- Dumped by pg_dump version 15.3 (Ubuntu 15.3-1.pgdg23.04+1)
+-- Dumped from database version 15.4 (Ubuntu 15.4-1.pgdg23.04+1)
+-- Dumped by pg_dump version 15.4 (Ubuntu 15.4-1.pgdg23.04+1)
+
+-- Started on 2023-08-22 15:58:59 -03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,6 +20,7 @@ SET row_security = off;
 
 DROP DATABASE IF EXISTS de;
 --
+-- TOC entry 3726 (class 1262 OID 38562)
 -- Name: de; Type: DATABASE; Schema: -; Owner: derole
 --
 
@@ -40,6 +43,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- TOC entry 3727 (class 0 OID 0)
 -- Name: de; Type: DATABASE PROPERTIES; Schema: -; Owner: derole
 --
 
@@ -63,6 +67,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- TOC entry 6 (class 2615 OID 38563)
 -- Name: accounting; Type: SCHEMA; Schema: -; Owner: derole
 --
 
@@ -72,6 +77,7 @@ CREATE SCHEMA accounting;
 ALTER SCHEMA accounting OWNER TO derole;
 
 --
+-- TOC entry 7 (class 2615 OID 38564)
 -- Name: auth; Type: SCHEMA; Schema: -; Owner: derole
 --
 
@@ -81,6 +87,7 @@ CREATE SCHEMA auth;
 ALTER SCHEMA auth OWNER TO derole;
 
 --
+-- TOC entry 8 (class 2615 OID 38565)
 -- Name: entities; Type: SCHEMA; Schema: -; Owner: derole
 --
 
@@ -90,6 +97,7 @@ CREATE SCHEMA entities;
 ALTER SCHEMA entities OWNER TO derole;
 
 --
+-- TOC entry 10 (class 2615 OID 2200)
 -- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
@@ -99,6 +107,7 @@ ALTER SCHEMA entities OWNER TO derole;
 ALTER SCHEMA public OWNER TO postgres;
 
 --
+-- TOC entry 9 (class 2615 OID 38566)
 -- Name: syslogic; Type: SCHEMA; Schema: -; Owner: derole
 --
 
@@ -108,6 +117,7 @@ CREATE SCHEMA syslogic;
 ALTER SCHEMA syslogic OWNER TO derole;
 
 --
+-- TOC entry 2 (class 3079 OID 38567)
 -- Name: ltree; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -115,6 +125,8 @@ CREATE EXTENSION IF NOT EXISTS ltree WITH SCHEMA public;
 
 
 --
+-- TOC entry 3729 (class 0 OID 0)
+-- Dependencies: 2
 -- Name: EXTENSION ltree; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -122,6 +134,7 @@ COMMENT ON EXTENSION ltree IS 'data type for hierarchical tree-like structures';
 
 
 --
+-- TOC entry 343 (class 1255 OID 39079)
 -- Name: bas_acc_chart_delete_cascade_after_delete(); Type: FUNCTION; Schema: accounting; Owner: derole
 --
 
@@ -138,6 +151,7 @@ $$;
 ALTER FUNCTION accounting.bas_acc_chart_delete_cascade_after_delete() OWNER TO derole;
 
 --
+-- TOC entry 345 (class 1255 OID 39082)
 -- Name: bas_acc_chart_update_children_after_update_parent(); Type: FUNCTION; Schema: accounting; Owner: derole
 --
 
@@ -159,6 +173,7 @@ $$;
 ALTER FUNCTION accounting.bas_acc_chart_update_children_after_update_parent() OWNER TO derole;
 
 --
+-- TOC entry 344 (class 1255 OID 39080)
 -- Name: bas_acc_chart_update_path_before_insert_or_update(); Type: FUNCTION; Schema: accounting; Owner: derole
 --
 
@@ -195,6 +210,7 @@ $$;
 ALTER FUNCTION accounting.bas_acc_chart_update_path_before_insert_or_update() OWNER TO derole;
 
 --
+-- TOC entry 340 (class 1255 OID 38752)
 -- Name: sync_bas_all_columns_trigger(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -243,6 +259,7 @@ $$;
 ALTER FUNCTION public.sync_bas_all_columns_trigger() OWNER TO postgres;
 
 --
+-- TOC entry 341 (class 1255 OID 38753)
 -- Name: delete_bas_data_dic(); Type: FUNCTION; Schema: syslogic; Owner: postgres
 --
 
@@ -260,6 +277,7 @@ $$;
 ALTER FUNCTION syslogic.delete_bas_data_dic() OWNER TO postgres;
 
 --
+-- TOC entry 342 (class 1255 OID 38754)
 -- Name: insert_bas_data_dic(); Type: FUNCTION; Schema: syslogic; Owner: postgres
 --
 
@@ -281,6 +299,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- TOC entry 219 (class 1259 OID 38755)
 -- Name: bas_acc_chart; Type: TABLE; Schema: accounting; Owner: derole
 --
 
@@ -298,6 +317,8 @@ CREATE TABLE accounting.bas_acc_chart (
 ALTER TABLE accounting.bas_acc_chart OWNER TO derole;
 
 --
+-- TOC entry 3730 (class 0 OID 0)
+-- Dependencies: 219
 -- Name: TABLE bas_acc_chart; Type: COMMENT; Schema: accounting; Owner: derole
 --
 
@@ -310,6 +331,7 @@ COMMENT ON TABLE accounting.bas_acc_chart IS 'Rules:
 
 
 --
+-- TOC entry 220 (class 1259 OID 38763)
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE; Schema: accounting; Owner: derole
 --
 
@@ -324,6 +346,8 @@ CREATE SEQUENCE accounting.bas_acc_chart_acc_id_seq
 ALTER TABLE accounting.bas_acc_chart_acc_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3731 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
 
@@ -331,6 +355,7 @@ ALTER SEQUENCE accounting.bas_acc_chart_acc_id_seq OWNED BY accounting.bas_acc_c
 
 
 --
+-- TOC entry 221 (class 1259 OID 38764)
 -- Name: eve_acc_entries; Type: TABLE; Schema: accounting; Owner: derole
 --
 
@@ -346,6 +371,7 @@ CREATE TABLE accounting.eve_acc_entries (
 ALTER TABLE accounting.eve_acc_entries OWNER TO derole;
 
 --
+-- TOC entry 222 (class 1259 OID 38768)
 -- Name: eve_acc_entries_entry_id_seq; Type: SEQUENCE; Schema: accounting; Owner: derole
 --
 
@@ -361,6 +387,8 @@ CREATE SEQUENCE accounting.eve_acc_entries_entry_id_seq
 ALTER TABLE accounting.eve_acc_entries_entry_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3732 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: eve_acc_entries_entry_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
 
@@ -368,6 +396,7 @@ ALTER SEQUENCE accounting.eve_acc_entries_entry_id_seq OWNED BY accounting.eve_a
 
 
 --
+-- TOC entry 223 (class 1259 OID 38769)
 -- Name: eve_bus_transactions; Type: TABLE; Schema: accounting; Owner: derole
 --
 
@@ -383,6 +412,7 @@ CREATE TABLE accounting.eve_bus_transactions (
 ALTER TABLE accounting.eve_bus_transactions OWNER TO derole;
 
 --
+-- TOC entry 224 (class 1259 OID 38778)
 -- Name: eve_bus_transactions_trans_id_seq; Type: SEQUENCE; Schema: accounting; Owner: derole
 --
 
@@ -398,6 +428,8 @@ CREATE SEQUENCE accounting.eve_bus_transactions_trans_id_seq
 ALTER TABLE accounting.eve_bus_transactions_trans_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3733 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: eve_bus_transactions_trans_id_seq; Type: SEQUENCE OWNED BY; Schema: accounting; Owner: derole
 --
 
@@ -405,6 +437,7 @@ ALTER SEQUENCE accounting.eve_bus_transactions_trans_id_seq OWNED BY accounting.
 
 
 --
+-- TOC entry 225 (class 1259 OID 38779)
 -- Name: bas_entities; Type: TABLE; Schema: entities; Owner: derole
 --
 
@@ -421,6 +454,8 @@ CREATE TABLE entities.bas_entities (
 ALTER TABLE entities.bas_entities OWNER TO derole;
 
 --
+-- TOC entry 3734 (class 0 OID 0)
+-- Dependencies: 225
 -- Name: TABLE bas_entities; Type: COMMENT; Schema: entities; Owner: derole
 --
 
@@ -432,6 +467,7 @@ Exemplos de uso: A tabela é utilizada para armazenar e gerenciar as informaçõ
 
 
 --
+-- TOC entry 250 (class 1259 OID 39064)
 -- Name: vw_eve_acc_entries; Type: VIEW; Schema: accounting; Owner: derole
 --
 
@@ -457,6 +493,7 @@ CREATE VIEW accounting.vw_eve_acc_entries AS
 ALTER TABLE accounting.vw_eve_acc_entries OWNER TO derole;
 
 --
+-- TOC entry 226 (class 1259 OID 38790)
 -- Name: bas_permissions; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -471,6 +508,8 @@ CREATE TABLE auth.bas_permissions (
 ALTER TABLE auth.bas_permissions OWNER TO derole;
 
 --
+-- TOC entry 3735 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: TABLE bas_permissions; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -482,6 +521,7 @@ Exemplos de uso: A tabela é utilizada para gerenciar as permissões de cada ent
 
 
 --
+-- TOC entry 227 (class 1259 OID 38794)
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -496,6 +536,8 @@ CREATE SEQUENCE auth.bas_permissions_permission_id_seq
 ALTER TABLE auth.bas_permissions_permission_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3736 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -503,6 +545,7 @@ ALTER SEQUENCE auth.bas_permissions_permission_id_seq OWNED BY auth.bas_permissi
 
 
 --
+-- TOC entry 228 (class 1259 OID 38795)
 -- Name: bas_roles; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -516,6 +559,8 @@ CREATE TABLE auth.bas_roles (
 ALTER TABLE auth.bas_roles OWNER TO derole;
 
 --
+-- TOC entry 3737 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: TABLE bas_roles; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -527,6 +572,7 @@ Exemplos de uso: A tabela é utilizada para definir e gerenciar os papéis dispo
 
 
 --
+-- TOC entry 229 (class 1259 OID 38800)
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -541,6 +587,8 @@ CREATE SEQUENCE auth.bas_roles_role_id_seq
 ALTER TABLE auth.bas_roles_role_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3738 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -548,6 +596,7 @@ ALTER SEQUENCE auth.bas_roles_role_id_seq OWNED BY auth.bas_roles.role_id;
 
 
 --
+-- TOC entry 230 (class 1259 OID 38801)
 -- Name: bas_table_permissions; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -564,6 +613,7 @@ CREATE TABLE auth.bas_table_permissions (
 ALTER TABLE auth.bas_table_permissions OWNER TO derole;
 
 --
+-- TOC entry 231 (class 1259 OID 38804)
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -579,6 +629,8 @@ CREATE SEQUENCE auth.bas_table_permissions_tpermission_id_seq
 ALTER TABLE auth.bas_table_permissions_tpermission_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3739 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -586,6 +638,7 @@ ALTER SEQUENCE auth.bas_table_permissions_tpermission_id_seq OWNED BY auth.bas_t
 
 
 --
+-- TOC entry 232 (class 1259 OID 38805)
 -- Name: bas_tables; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -598,6 +651,7 @@ CREATE TABLE auth.bas_tables (
 ALTER TABLE auth.bas_tables OWNER TO derole;
 
 --
+-- TOC entry 233 (class 1259 OID 38810)
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -613,6 +667,8 @@ CREATE SEQUENCE auth.bas_tables_table_id_seq
 ALTER TABLE auth.bas_tables_table_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3740 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -620,6 +676,7 @@ ALTER SEQUENCE auth.bas_tables_table_id_seq OWNED BY auth.bas_tables.table_id;
 
 
 --
+-- TOC entry 234 (class 1259 OID 38811)
 -- Name: bas_users; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -635,6 +692,8 @@ CREATE TABLE auth.bas_users (
 ALTER TABLE auth.bas_users OWNER TO derole;
 
 --
+-- TOC entry 3741 (class 0 OID 0)
+-- Dependencies: 234
 -- Name: TABLE bas_users; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -644,6 +703,7 @@ Exemplos de uso: A tabela é utilizada para armazenar e gerenciar as informaçõ
 
 
 --
+-- TOC entry 235 (class 1259 OID 38817)
 -- Name: bas_users_user_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -659,6 +719,8 @@ CREATE SEQUENCE auth.bas_users_user_id_seq
 ALTER TABLE auth.bas_users_user_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3742 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: bas_users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -666,6 +728,7 @@ ALTER SEQUENCE auth.bas_users_user_id_seq OWNED BY auth.bas_users.user_id;
 
 
 --
+-- TOC entry 236 (class 1259 OID 38818)
 -- Name: eve_access_tokens; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -680,6 +743,8 @@ CREATE TABLE auth.eve_access_tokens (
 ALTER TABLE auth.eve_access_tokens OWNER TO derole;
 
 --
+-- TOC entry 3743 (class 0 OID 0)
+-- Dependencies: 236
 -- Name: TABLE eve_access_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -691,6 +756,7 @@ Exemplos de uso: A tabela é utilizada para armazenar e validar os tokens de ace
 
 
 --
+-- TOC entry 237 (class 1259 OID 38824)
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -705,6 +771,8 @@ CREATE SEQUENCE auth.eve_access_tokens_token_id_seq
 ALTER TABLE auth.eve_access_tokens_token_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3744 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -712,6 +780,7 @@ ALTER SEQUENCE auth.eve_access_tokens_token_id_seq OWNED BY auth.eve_access_toke
 
 
 --
+-- TOC entry 238 (class 1259 OID 38825)
 -- Name: eve_audit_log; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -726,6 +795,8 @@ CREATE TABLE auth.eve_audit_log (
 ALTER TABLE auth.eve_audit_log OWNER TO derole;
 
 --
+-- TOC entry 3745 (class 0 OID 0)
+-- Dependencies: 238
 -- Name: TABLE eve_audit_log; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -735,6 +806,7 @@ Exemplos de uso: A tabela é utilizada para registrar informações relevantes s
 
 
 --
+-- TOC entry 239 (class 1259 OID 38831)
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -749,6 +821,8 @@ CREATE SEQUENCE auth.eve_audit_log_log_id_seq
 ALTER TABLE auth.eve_audit_log_log_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3746 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -756,6 +830,7 @@ ALTER SEQUENCE auth.eve_audit_log_log_id_seq OWNED BY auth.eve_audit_log.log_id;
 
 
 --
+-- TOC entry 240 (class 1259 OID 38832)
 -- Name: eve_refresh_tokens; Type: TABLE; Schema: auth; Owner: derole
 --
 
@@ -770,6 +845,8 @@ CREATE TABLE auth.eve_refresh_tokens (
 ALTER TABLE auth.eve_refresh_tokens OWNER TO derole;
 
 --
+-- TOC entry 3747 (class 0 OID 0)
+-- Dependencies: 240
 -- Name: TABLE eve_refresh_tokens; Type: COMMENT; Schema: auth; Owner: derole
 --
 
@@ -781,6 +858,7 @@ Exemplos de uso: Durante o processo de renovação do token de acesso, a tabela 
 
 
 --
+-- TOC entry 241 (class 1259 OID 38838)
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE; Schema: auth; Owner: derole
 --
 
@@ -795,6 +873,8 @@ CREATE SEQUENCE auth.eve_refresh_tokens_rtoken_id_seq
 ALTER TABLE auth.eve_refresh_tokens_rtoken_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3748 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: auth; Owner: derole
 --
 
@@ -802,6 +882,7 @@ ALTER SEQUENCE auth.eve_refresh_tokens_rtoken_id_seq OWNED BY auth.eve_refresh_t
 
 
 --
+-- TOC entry 242 (class 1259 OID 38839)
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE; Schema: entities; Owner: derole
 --
 
@@ -816,6 +897,8 @@ CREATE SEQUENCE entities.bas_entities_entity_id_seq
 ALTER TABLE entities.bas_entities_entity_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3749 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE OWNED BY; Schema: entities; Owner: derole
 --
 
@@ -823,6 +906,7 @@ ALTER SEQUENCE entities.bas_entities_entity_id_seq OWNED BY entities.bas_entitie
 
 
 --
+-- TOC entry 243 (class 1259 OID 38840)
 -- Name: todos; Type: TABLE; Schema: public; Owner: derole
 --
 
@@ -836,6 +920,7 @@ CREATE TABLE public.todos (
 ALTER TABLE public.todos OWNER TO derole;
 
 --
+-- TOC entry 244 (class 1259 OID 38846)
 -- Name: todos_id_seq; Type: SEQUENCE; Schema: public; Owner: derole
 --
 
@@ -851,6 +936,8 @@ CREATE SEQUENCE public.todos_id_seq
 ALTER TABLE public.todos_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3750 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: todos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: derole
 --
 
@@ -858,6 +945,7 @@ ALTER SEQUENCE public.todos_id_seq OWNED BY public.todos.id;
 
 
 --
+-- TOC entry 245 (class 1259 OID 38847)
 -- Name: bas_all_columns; Type: TABLE; Schema: syslogic; Owner: derole
 --
 
@@ -874,6 +962,7 @@ CREATE TABLE syslogic.bas_all_columns (
 ALTER TABLE syslogic.bas_all_columns OWNER TO derole;
 
 --
+-- TOC entry 246 (class 1259 OID 38853)
 -- Name: bas_data_dic; Type: TABLE; Schema: syslogic; Owner: derole
 --
 
@@ -891,6 +980,8 @@ CREATE TABLE syslogic.bas_data_dic (
 ALTER TABLE syslogic.bas_data_dic OWNER TO derole;
 
 --
+-- TOC entry 3751 (class 0 OID 0)
+-- Dependencies: 246
 -- Name: TABLE bas_data_dic; Type: COMMENT; Schema: syslogic; Owner: derole
 --
 
@@ -898,6 +989,7 @@ COMMENT ON TABLE syslogic.bas_data_dic IS 'Data Dictionary';
 
 
 --
+-- TOC entry 247 (class 1259 OID 38858)
 -- Name: bas_data_dic_class; Type: TABLE; Schema: syslogic; Owner: derole
 --
 
@@ -911,6 +1003,7 @@ CREATE TABLE syslogic.bas_data_dic_class (
 ALTER TABLE syslogic.bas_data_dic_class OWNER TO derole;
 
 --
+-- TOC entry 248 (class 1259 OID 38863)
 -- Name: bas_data_dic_class_class_id_seq; Type: SEQUENCE; Schema: syslogic; Owner: derole
 --
 
@@ -926,6 +1019,8 @@ CREATE SEQUENCE syslogic.bas_data_dic_class_class_id_seq
 ALTER TABLE syslogic.bas_data_dic_class_class_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3752 (class 0 OID 0)
+-- Dependencies: 248
 -- Name: bas_data_dic_class_class_id_seq; Type: SEQUENCE OWNED BY; Schema: syslogic; Owner: derole
 --
 
@@ -933,6 +1028,7 @@ ALTER SEQUENCE syslogic.bas_data_dic_class_class_id_seq OWNED BY syslogic.bas_da
 
 
 --
+-- TOC entry 249 (class 1259 OID 38864)
 -- Name: bas_data_dic_def_id_seq; Type: SEQUENCE; Schema: syslogic; Owner: derole
 --
 
@@ -948,6 +1044,8 @@ CREATE SEQUENCE syslogic.bas_data_dic_def_id_seq
 ALTER TABLE syslogic.bas_data_dic_def_id_seq OWNER TO derole;
 
 --
+-- TOC entry 3753 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: bas_data_dic_def_id_seq; Type: SEQUENCE OWNED BY; Schema: syslogic; Owner: derole
 --
 
@@ -955,6 +1053,7 @@ ALTER SEQUENCE syslogic.bas_data_dic_def_id_seq OWNED BY syslogic.bas_data_dic.d
 
 
 --
+-- TOC entry 3472 (class 2604 OID 38960)
 -- Name: bas_acc_chart acc_id; Type: DEFAULT; Schema: accounting; Owner: derole
 --
 
@@ -962,6 +1061,7 @@ ALTER TABLE ONLY accounting.bas_acc_chart ALTER COLUMN acc_id SET DEFAULT nextva
 
 
 --
+-- TOC entry 3476 (class 2604 OID 38961)
 -- Name: eve_acc_entries entry_id; Type: DEFAULT; Schema: accounting; Owner: derole
 --
 
@@ -969,6 +1069,7 @@ ALTER TABLE ONLY accounting.eve_acc_entries ALTER COLUMN entry_id SET DEFAULT ne
 
 
 --
+-- TOC entry 3478 (class 2604 OID 38962)
 -- Name: eve_bus_transactions trans_id; Type: DEFAULT; Schema: accounting; Owner: derole
 --
 
@@ -976,6 +1077,7 @@ ALTER TABLE ONLY accounting.eve_bus_transactions ALTER COLUMN trans_id SET DEFAU
 
 
 --
+-- TOC entry 3483 (class 2604 OID 38963)
 -- Name: bas_permissions permission_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -983,6 +1085,7 @@ ALTER TABLE ONLY auth.bas_permissions ALTER COLUMN permission_id SET DEFAULT nex
 
 
 --
+-- TOC entry 3485 (class 2604 OID 38964)
 -- Name: bas_roles role_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -990,6 +1093,7 @@ ALTER TABLE ONLY auth.bas_roles ALTER COLUMN role_id SET DEFAULT nextval('auth.b
 
 
 --
+-- TOC entry 3486 (class 2604 OID 38965)
 -- Name: bas_table_permissions tpermission_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -997,6 +1101,7 @@ ALTER TABLE ONLY auth.bas_table_permissions ALTER COLUMN tpermission_id SET DEFA
 
 
 --
+-- TOC entry 3487 (class 2604 OID 38966)
 -- Name: bas_tables table_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -1004,6 +1109,7 @@ ALTER TABLE ONLY auth.bas_tables ALTER COLUMN table_id SET DEFAULT nextval('auth
 
 
 --
+-- TOC entry 3488 (class 2604 OID 38967)
 -- Name: bas_users user_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -1011,6 +1117,7 @@ ALTER TABLE ONLY auth.bas_users ALTER COLUMN user_id SET DEFAULT nextval('auth.b
 
 
 --
+-- TOC entry 3490 (class 2604 OID 38968)
 -- Name: eve_access_tokens token_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -1018,6 +1125,7 @@ ALTER TABLE ONLY auth.eve_access_tokens ALTER COLUMN token_id SET DEFAULT nextva
 
 
 --
+-- TOC entry 3492 (class 2604 OID 38969)
 -- Name: eve_audit_log log_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -1025,6 +1133,7 @@ ALTER TABLE ONLY auth.eve_audit_log ALTER COLUMN log_id SET DEFAULT nextval('aut
 
 
 --
+-- TOC entry 3494 (class 2604 OID 38970)
 -- Name: eve_refresh_tokens rtoken_id; Type: DEFAULT; Schema: auth; Owner: derole
 --
 
@@ -1032,6 +1141,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens ALTER COLUMN rtoken_id SET DEFAULT next
 
 
 --
+-- TOC entry 3481 (class 2604 OID 38971)
 -- Name: bas_entities entity_id; Type: DEFAULT; Schema: entities; Owner: derole
 --
 
@@ -1039,6 +1149,7 @@ ALTER TABLE ONLY entities.bas_entities ALTER COLUMN entity_id SET DEFAULT nextva
 
 
 --
+-- TOC entry 3496 (class 2604 OID 38972)
 -- Name: todos id; Type: DEFAULT; Schema: public; Owner: derole
 --
 
@@ -1046,6 +1157,7 @@ ALTER TABLE ONLY public.todos ALTER COLUMN id SET DEFAULT nextval('public.todos_
 
 
 --
+-- TOC entry 3499 (class 2604 OID 38973)
 -- Name: bas_data_dic def_id; Type: DEFAULT; Schema: syslogic; Owner: derole
 --
 
@@ -1053,6 +1165,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic ALTER COLUMN def_id SET DEFAULT nextval('
 
 
 --
+-- TOC entry 3500 (class 2604 OID 38974)
 -- Name: bas_data_dic_class class_id; Type: DEFAULT; Schema: syslogic; Owner: derole
 --
 
@@ -1060,97 +1173,101 @@ ALTER TABLE ONLY syslogic.bas_data_dic_class ALTER COLUMN class_id SET DEFAULT n
 
 
 --
+-- TOC entry 3690 (class 0 OID 38755)
+-- Dependencies: 219
 -- Data for Name: bas_acc_chart; Type: TABLE DATA; Schema: accounting; Owner: derole
 --
 
-INSERT INTO accounting.bas_acc_chart VALUES (104, 'CEF Frederico', 0.00, 0.00, false, '001.002.001', 'Ativo > Banco > CEF Frederico');
-INSERT INTO accounting.bas_acc_chart VALUES (109, 'BB Clarissa', 0.00, 513.10, false, '001.002.002', 'Ativo > Banco > BB Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (108, 'Poupança CEF Frederico', 0.00, 0.00, false, '001.003.001', 'Ativo > Poupança > Poupança CEF Frederico');
-INSERT INTO accounting.bas_acc_chart VALUES (110, 'Poupança BB Clarissa', 0.00, 30301.59, false, '001.003.002', 'Ativo > Poupança > Poupança BB Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (112, 'Cartão Visa Clarissa', 0.00, -8214.73, false, '002.002', 'Passivo > Cartão Visa Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (227, 'Venda de Software - Frederico', 0.00, 0.00, false, '003.005', 'Receita > Venda de Software - Frederico');
-INSERT INTO accounting.bas_acc_chart VALUES (107, 'Gaveta Clarissa', 0.00, 259.30, false, '001.001.003', 'Ativo > Dinheiro > Gaveta Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (201, 'Caixa Daniel', 0.00, 0.00, false, '001.001.004', 'Ativo > Dinheiro > Caixa Daniel');
-INSERT INTO accounting.bas_acc_chart VALUES (113, 'Cartão ELO', 0.00, 0.00, false, '002.003', 'Passivo > Cartão ELO');
-INSERT INTO accounting.bas_acc_chart VALUES (114, 'Cartão Master Fred', 0.00, 0.00, false, '002.004', 'Passivo > Cartão Master Fred');
-INSERT INTO accounting.bas_acc_chart VALUES (138, 'Animais', 0.00, 2333.33, false, '004.002.002', 'Despesa > Casa > Animais');
-INSERT INTO accounting.bas_acc_chart VALUES (167, 'Remédios', 0.00, 667.98, false, '004.013.005', 'Despesa > Saúde > Remédios');
-INSERT INTO accounting.bas_acc_chart VALUES (168, 'Terapias', 0.00, 0.00, false, '004.013.006', 'Despesa > Saúde > Terapias');
-INSERT INTO accounting.bas_acc_chart VALUES (102, 'Carteira Clarissa', 0.00, 50.00, false, '001.001.001', 'Ativo > Dinheiro > Carteira Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (2, 'Ativo', 0.00, 31541.18, false, '001', 'Ativo');
-INSERT INTO accounting.bas_acc_chart VALUES (3, 'Passivo', 0.00, -11127.07, false, '002', 'Passivo');
-INSERT INTO accounting.bas_acc_chart VALUES (4, 'Receita', 0.00, -0.20, false, '003', 'Receita');
-INSERT INTO accounting.bas_acc_chart VALUES (5, 'Despesa', 0.00, 21713.02, false, '004', 'Despesa');
-INSERT INTO accounting.bas_acc_chart VALUES (1, 'RAIZ', 0.00, 0.00, false, '000', 'RAIZ');
-INSERT INTO accounting.bas_acc_chart VALUES (198, 'Banco', 0.00, 513.10, false, '001.002', 'Ativo > Banco');
-INSERT INTO accounting.bas_acc_chart VALUES (116, 'Clarissa', 0.00, 0.00, false, '003.002', 'Receita > Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (135, 'Lanche', 0.00, 28.78, false, '004.001.001', 'Despesa > Alimentação > Lanche');
-INSERT INTO accounting.bas_acc_chart VALUES (136, 'Restaurante', 0.00, 80.83, false, '004.001.002', 'Despesa > Alimentação > Restaurante');
-INSERT INTO accounting.bas_acc_chart VALUES (137, 'Água', 0.00, 0.00, false, '004.002.001', 'Despesa > Casa > Água');
-INSERT INTO accounting.bas_acc_chart VALUES (139, 'Assinaturas', 0.00, 377.00, false, '004.002.003', 'Despesa > Casa > Assinaturas');
-INSERT INTO accounting.bas_acc_chart VALUES (140, 'Cama, mesa e banho', 0.00, 0.00, false, '004.002.004', 'Despesa > Casa > Cama, mesa e banho');
-INSERT INTO accounting.bas_acc_chart VALUES (141, 'Decoração', 0.00, 15.00, false, '004.002.005', 'Despesa > Casa > Decoração');
-INSERT INTO accounting.bas_acc_chart VALUES (142, 'Eletricidade', 0.00, 466.40, false, '004.002.006', 'Despesa > Casa > Eletricidade');
-INSERT INTO accounting.bas_acc_chart VALUES (143, 'Eletrodomésticos', 0.00, 1110.49, false, '004.002.007', 'Despesa > Casa > Eletrodomésticos');
-INSERT INTO accounting.bas_acc_chart VALUES (199, 'Poupança', 0.00, 30301.59, false, '001.003', 'Ativo > Poupança');
-INSERT INTO accounting.bas_acc_chart VALUES (197, 'Dinheiro', 0.00, 391.20, false, '001.001', 'Ativo > Dinheiro');
-INSERT INTO accounting.bas_acc_chart VALUES (105, 'Estorno', 0.00, 0.00, false, '001.004', 'Ativo > Estorno');
-INSERT INTO accounting.bas_acc_chart VALUES (115, 'Aluguel Agostinho', 0.00, 0.00, false, '003.001', 'Receita > Aluguel Agostinho');
-INSERT INTO accounting.bas_acc_chart VALUES (117, 'Clarissa Ind. Transporte', 0.00, 0.00, false, '003.003', 'Receita > Clarissa Ind. Transporte');
-INSERT INTO accounting.bas_acc_chart VALUES (118, 'Juros Poupança', 0.00, 0.00, false, '003.004', 'Receita > Juros Poupança');
-INSERT INTO accounting.bas_acc_chart VALUES (119, 'Alimentação', 0.00, 924.10, false, '004.001', 'Despesa > Alimentação');
-INSERT INTO accounting.bas_acc_chart VALUES (120, 'Casa', 0.00, 6386.68, false, '004.002', 'Despesa > Casa');
-INSERT INTO accounting.bas_acc_chart VALUES (121, 'Despesas Desconhecidas', 0.00, 525.69, false, '004.003', 'Despesa > Despesas Desconhecidas');
-INSERT INTO accounting.bas_acc_chart VALUES (123, 'Diversão', 0.00, 1947.33, false, '004.005', 'Despesa > Diversão');
-INSERT INTO accounting.bas_acc_chart VALUES (124, 'Educação', 0.00, 0.00, false, '004.006', 'Despesa > Educação');
-INSERT INTO accounting.bas_acc_chart VALUES (125, 'Empresa', 0.00, 0.00, false, '004.007', 'Despesa > Empresa');
-INSERT INTO accounting.bas_acc_chart VALUES (126, 'Filhos', 0.00, 5771.50, false, '004.008', 'Despesa > Filhos');
-INSERT INTO accounting.bas_acc_chart VALUES (127, 'Higiene & Beleza', 0.00, 50.00, false, '004.009', 'Despesa > Higiene & Beleza');
-INSERT INTO accounting.bas_acc_chart VALUES (128, 'Perda', 0.00, 0.00, false, '004.010', 'Despesa > Perda');
-INSERT INTO accounting.bas_acc_chart VALUES (129, 'Presentes e Doações', 0.00, 925.91, false, '004.011', 'Despesa > Presentes e Doações');
-INSERT INTO accounting.bas_acc_chart VALUES (130, 'Sanguessugas', 0.00, 72.67, false, '004.012', 'Despesa > Sanguessugas');
-INSERT INTO accounting.bas_acc_chart VALUES (132, 'Transporte', 0.00, 2647.72, false, '004.014', 'Despesa > Transporte');
-INSERT INTO accounting.bas_acc_chart VALUES (133, 'Vestuário', 0.00, 1731.94, false, '004.015', 'Despesa > Vestuário');
-INSERT INTO accounting.bas_acc_chart VALUES (145, 'Ferramentas e utensílios', 0.00, 0.00, false, '004.002.009', 'Despesa > Casa > Ferramentas e utensílios');
-INSERT INTO accounting.bas_acc_chart VALUES (146, 'Jardineiro', 0.00, 150.00, false, '004.002.010', 'Despesa > Casa > Jardineiro');
-INSERT INTO accounting.bas_acc_chart VALUES (147, 'Manutenção e Reparos', 0.00, 341.44, false, '004.002.011', 'Despesa > Casa > Manutenção e Reparos');
-INSERT INTO accounting.bas_acc_chart VALUES (148, 'Móveis', 0.00, 100.00, false, '004.002.012', 'Despesa > Casa > Móveis');
-INSERT INTO accounting.bas_acc_chart VALUES (149, 'Produtos Consumíveis', 0.00, 23.00, false, '004.002.013', 'Despesa > Casa > Produtos Consumíveis');
-INSERT INTO accounting.bas_acc_chart VALUES (150, 'Produtos de Limpeza', 0.00, 23.46, false, '004.002.014', 'Despesa > Casa > Produtos de Limpeza');
-INSERT INTO accounting.bas_acc_chart VALUES (152, 'Briquedos', 0.00, 1584.63, false, '004.005.001', 'Despesa > Diversão > Briquedos');
-INSERT INTO accounting.bas_acc_chart VALUES (153, 'Passeios', 0.00, 0.00, false, '004.005.002', 'Despesa > Diversão > Passeios');
-INSERT INTO accounting.bas_acc_chart VALUES (154, 'Viagens', 0.00, 0.00, false, '004.005.003', 'Despesa > Diversão > Viagens');
-INSERT INTO accounting.bas_acc_chart VALUES (155, 'TagPlus', 0.00, 0.00, false, '004.007.001', 'Despesa > Empresa > TagPlus');
-INSERT INTO accounting.bas_acc_chart VALUES (156, 'Daniel', 0.00, 1075.00, false, '004.008.001', 'Despesa > Filhos > Daniel');
-INSERT INTO accounting.bas_acc_chart VALUES (157, 'Érica', 0.00, 4696.50, false, '004.008.002', 'Despesa > Filhos > Érica');
-INSERT INTO accounting.bas_acc_chart VALUES (158, 'Doações', 0.00, 880.37, false, '004.011.001', 'Despesa > Presentes e Doações > Doações');
-INSERT INTO accounting.bas_acc_chart VALUES (159, 'Presentes', 0.00, 45.54, false, '004.011.002', 'Despesa > Presentes e Doações > Presentes');
-INSERT INTO accounting.bas_acc_chart VALUES (160, 'Imposto de Renda', 0.00, 0.00, false, '004.012.001', 'Despesa > Sanguessugas > Imposto de Renda');
-INSERT INTO accounting.bas_acc_chart VALUES (161, 'Juros Bancários', 0.00, 0.00, false, '004.012.002', 'Despesa > Sanguessugas > Juros Bancários');
-INSERT INTO accounting.bas_acc_chart VALUES (162, 'Taxas Bancárias', 0.00, 72.67, false, '004.012.003', 'Despesa > Sanguessugas > Taxas Bancárias');
-INSERT INTO accounting.bas_acc_chart VALUES (169, 'Combustível', 0.00, 732.76, false, '004.014.001', 'Despesa > Transporte > Combustível');
-INSERT INTO accounting.bas_acc_chart VALUES (170, 'Estacionamento', 0.00, 44.40, false, '004.014.002', 'Despesa > Transporte > Estacionamento');
-INSERT INTO accounting.bas_acc_chart VALUES (171, 'IPVA', 0.00, 0.00, false, '004.014.003', 'Despesa > Transporte > IPVA');
-INSERT INTO accounting.bas_acc_chart VALUES (172, 'Lavagem', 0.00, 50.00, false, '004.014.004', 'Despesa > Transporte > Lavagem');
-INSERT INTO accounting.bas_acc_chart VALUES (173, 'Manutenção e Reparos', 0.00, 486.09, false, '004.014.005', 'Despesa > Transporte > Manutenção e Reparos');
-INSERT INTO accounting.bas_acc_chart VALUES (174, 'Passagens, taxi etc.', 0.00, 8.50, false, '004.014.006', 'Despesa > Transporte > Passagens, taxi etc.');
-INSERT INTO accounting.bas_acc_chart VALUES (175, 'Seguros', 0.00, 1325.97, false, '004.014.007', 'Despesa > Transporte > Seguros');
+INSERT INTO accounting.bas_acc_chart VALUES (112, 'Visa Card Clarissa', 0.00, -8214.73, false, '002.002', 'Liability > Visa Card Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (113, 'ELO Card', 0.00, 0.00, false, '002.003', 'Liability > ELO Card');
+INSERT INTO accounting.bas_acc_chart VALUES (114, 'Master Card Fred', 0.00, 0.00, false, '002.004', 'Liability > Master Card Fred');
+INSERT INTO accounting.bas_acc_chart VALUES (227, 'Software Sale - Frederico', 0.00, 0.00, false, '003.005', 'Revenue > Software Sale - Frederico');
+INSERT INTO accounting.bas_acc_chart VALUES (116, 'Clarissa', 0.00, 0.00, false, '003.002', 'Revenue > Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (1, 'ROOT', 0.00, 0.00, false, '000', 'ROOT');
+INSERT INTO accounting.bas_acc_chart VALUES (2, 'Asset', 0.00, 31541.18, false, '001', 'Asset');
+INSERT INTO accounting.bas_acc_chart VALUES (107, 'Drawer Clarissa', 0.00, 259.30, false, '001.001.003', 'Asset > Cash > Drawer Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (102, 'Wallet Clarissa', 0.00, 50.00, false, '001.001.001', 'Asset > Cash > Wallet Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (198, 'Bank', 0.00, 513.10, false, '001.002', 'Asset > Bank');
+INSERT INTO accounting.bas_acc_chart VALUES (104, 'CEF Frederico', 0.00, 0.00, false, '001.002.001', 'Asset > Bank > CEF Frederico');
+INSERT INTO accounting.bas_acc_chart VALUES (109, 'BB Clarissa', 0.00, 513.10, false, '001.002.002', 'Asset > Bank > BB Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (108, 'Savings CEF Frederico', 0.00, 0.00, false, '001.003.001', 'Asset > Savings > Savings CEF Frederico');
+INSERT INTO accounting.bas_acc_chart VALUES (110, 'Savings BB Clarissa', 0.00, 30301.59, false, '001.003.002', 'Asset > Savings > Savings BB Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (201, 'Daniel’s Box', 0.00, 0.00, false, '001.001.004', 'Asset > Cash > Daniel’s Box');
+INSERT INTO accounting.bas_acc_chart VALUES (3, 'Liability', 0.00, -11127.07, false, '002', 'Liability');
+INSERT INTO accounting.bas_acc_chart VALUES (4, 'Revenue', 0.00, -0.20, false, '003', 'Revenue');
+INSERT INTO accounting.bas_acc_chart VALUES (5, 'Expense', 0.00, 21713.02, false, '004', 'Expense');
+INSERT INTO accounting.bas_acc_chart VALUES (105, 'Reversal', 0.00, 0.00, false, '001.004', 'Asset > Reversal');
+INSERT INTO accounting.bas_acc_chart VALUES (106, 'Inventory', 0.00, 335.29, false, '001.005', 'Asset > Inventory');
+INSERT INTO accounting.bas_acc_chart VALUES (111, 'Master Card Clarissa', 0.00, -2795.83, false, '002.001', 'Liability > Master Card Clarissa');
+INSERT INTO accounting.bas_acc_chart VALUES (115, 'Rent Agostinho', 0.00, 0.00, false, '003.001', 'Revenue > Rent Agostinho');
+INSERT INTO accounting.bas_acc_chart VALUES (117, 'Clarissa Ind. Transport', 0.00, 0.00, false, '003.003', 'Revenue > Clarissa Ind. Transport');
+INSERT INTO accounting.bas_acc_chart VALUES (118, 'Savings Interest', 0.00, 0.00, false, '003.004', 'Revenue > Savings Interest');
+INSERT INTO accounting.bas_acc_chart VALUES (119, 'Food', 0.00, 924.10, false, '004.001', 'Expense > Food');
+INSERT INTO accounting.bas_acc_chart VALUES (134, 'Initial Balances', 0.00, -40789.27, false, '005.001', 'PL > Initial Balances');
+INSERT INTO accounting.bas_acc_chart VALUES (197, 'Cash', 0.00, 391.20, false, '001.001', 'Asset > Cash');
+INSERT INTO accounting.bas_acc_chart VALUES (199, 'Savings', 0.00, 30301.59, false, '001.003', 'Asset > Savings');
+INSERT INTO accounting.bas_acc_chart VALUES (120, 'House', 0.00, 6386.68, false, '004.002', 'Expense > House');
+INSERT INTO accounting.bas_acc_chart VALUES (121, 'Unknown Expenses', 0.00, 525.69, false, '004.003', 'Expense > Unknown Expenses');
+INSERT INTO accounting.bas_acc_chart VALUES (122, 'Not Registered', 0.00, 60.00, false, '004.004', 'Expense > Not Registered');
+INSERT INTO accounting.bas_acc_chart VALUES (123, 'Entertainment', 0.00, 1947.33, false, '004.005', 'Expense > Entertainment');
+INSERT INTO accounting.bas_acc_chart VALUES (124, 'Education', 0.00, 0.00, false, '004.006', 'Expense > Education');
+INSERT INTO accounting.bas_acc_chart VALUES (125, 'Company', 0.00, 0.00, false, '004.007', 'Expense > Company');
+INSERT INTO accounting.bas_acc_chart VALUES (126, 'Children', 0.00, 5771.50, false, '004.008', 'Expense > Children');
+INSERT INTO accounting.bas_acc_chart VALUES (135, 'Snack', 0.00, 28.78, false, '004.001.001', 'Expense > Food > Snack');
+INSERT INTO accounting.bas_acc_chart VALUES (136, 'Restaurant', 0.00, 80.83, false, '004.001.002', 'Expense > Food > Restaurant');
+INSERT INTO accounting.bas_acc_chart VALUES (137, 'Water', 0.00, 0.00, false, '004.002.001', 'Expense > House > Water');
+INSERT INTO accounting.bas_acc_chart VALUES (138, 'Animals', 0.00, 2333.33, false, '004.002.002', 'Expense > House > Animals');
+INSERT INTO accounting.bas_acc_chart VALUES (139, 'Subscriptions', 0.00, 377.00, false, '004.002.003', 'Expense > House > Subscriptions');
+INSERT INTO accounting.bas_acc_chart VALUES (140, 'Bed, table and bath', 0.00, 0.00, false, '004.002.004', 'Expense > House > Bed, table and bath');
+INSERT INTO accounting.bas_acc_chart VALUES (141, 'Decoration', 0.00, 15.00, false, '004.002.005', 'Expense > House > Decoration');
+INSERT INTO accounting.bas_acc_chart VALUES (142, 'Electricity', 0.00, 466.40, false, '004.002.006', 'Expense > House > Electricity');
+INSERT INTO accounting.bas_acc_chart VALUES (143, 'Appliances', 0.00, 1110.49, false, '004.002.007', 'Expense > House > Appliances');
+INSERT INTO accounting.bas_acc_chart VALUES (144, 'Maid', 0.00, 1105.00, false, '004.002.008', 'Expense > House > Maid');
+INSERT INTO accounting.bas_acc_chart VALUES (145, 'Tools and utensils', 0.00, 0.00, false, '004.002.009', 'Expense > House > Tools and utensils');
+INSERT INTO accounting.bas_acc_chart VALUES (146, 'Gardener', 0.00, 150.00, false, '004.002.010', 'Expense > House > Gardener');
+INSERT INTO accounting.bas_acc_chart VALUES (127, 'Hygiene & Beauty', 0.00, 50.00, false, '004.009', 'Expense > Hygiene & Beauty');
+INSERT INTO accounting.bas_acc_chart VALUES (128, 'Loss', 0.00, 0.00, false, '004.010', 'Expense > Loss');
+INSERT INTO accounting.bas_acc_chart VALUES (129, 'Gifts and Donations', 0.00, 925.91, false, '004.011', 'Expense > Gifts and Donations');
+INSERT INTO accounting.bas_acc_chart VALUES (130, 'Leeches', 0.00, 72.67, false, '004.012', 'Expense > Leeches');
+INSERT INTO accounting.bas_acc_chart VALUES (131, 'Health', 0.00, 667.98, false, '004.013', 'Expense > Health');
+INSERT INTO accounting.bas_acc_chart VALUES (132, 'Transport', 0.00, 2647.72, false, '004.014', 'Expense > Transport');
+INSERT INTO accounting.bas_acc_chart VALUES (133, 'Clothing', 0.00, 1731.94, false, '004.015', 'Expense > Clothing');
+INSERT INTO accounting.bas_acc_chart VALUES (147, 'Maintenance and Repairs', 0.00, 341.44, false, '004.002.011', 'Expense > House > Maintenance and Repairs');
+INSERT INTO accounting.bas_acc_chart VALUES (148, 'Furniture', 0.00, 100.00, false, '004.002.012', 'Expense > House > Furniture');
+INSERT INTO accounting.bas_acc_chart VALUES (149, 'Consumable Products', 0.00, 23.00, false, '004.002.013', 'Expense > House > Consumable Products');
+INSERT INTO accounting.bas_acc_chart VALUES (150, 'Cleaning Products', 0.00, 23.46, false, '004.002.014', 'Expense > House > Cleaning Products');
 INSERT INTO accounting.bas_acc_chart VALUES (6, 'PL', 0.00, -40789.27, false, '005', 'PL');
-INSERT INTO accounting.bas_acc_chart VALUES (134, 'Saldos Iniciais', 0.00, -40789.27, false, '005.001', 'PL > Saldos Iniciais');
-INSERT INTO accounting.bas_acc_chart VALUES (103, 'Carteira Frederico', 0.00, 81.90, false, '001.001.002', 'Ativo > Dinheiro > Carteira Frederico');
-INSERT INTO accounting.bas_acc_chart VALUES (106, 'Inventário', 0.00, 335.29, false, '001.005', 'Ativo > Inventário');
-INSERT INTO accounting.bas_acc_chart VALUES (111, 'Cartão Master Clarissa', 0.00, -2795.83, false, '002.001', 'Passivo > Cartão Master Clarissa');
-INSERT INTO accounting.bas_acc_chart VALUES (144, 'Empregada', 0.00, 1105.00, false, '004.002.008', 'Despesa > Casa > Empregada');
-INSERT INTO accounting.bas_acc_chart VALUES (151, 'Telefone e Internet', 0.00, 341.56, false, '004.002.015', 'Despesa > Casa > Telefone e Internet');
-INSERT INTO accounting.bas_acc_chart VALUES (122, 'Dinheiro Perdido', 0.00, 60.00, false, '004.004', 'Despesa > Dinheiro Perdido');
-INSERT INTO accounting.bas_acc_chart VALUES (131, 'Saúde', 0.00, 667.98, false, '004.013', 'Despesa > Saúde');
-INSERT INTO accounting.bas_acc_chart VALUES (163, 'Consultas', 0.00, 0.00, false, '004.013.001', 'Despesa > Saúde > Consultas');
-INSERT INTO accounting.bas_acc_chart VALUES (164, 'Exames', 0.00, 0.00, false, '004.013.002', 'Despesa > Saúde > Exames');
-INSERT INTO accounting.bas_acc_chart VALUES (165, 'Óculos', 0.00, 0.00, false, '004.013.003', 'Despesa > Saúde > Óculos');
-INSERT INTO accounting.bas_acc_chart VALUES (166, 'Plano de Saúde', 0.00, 0.00, false, '004.013.004', 'Despesa > Saúde > Plano de Saúde');
+INSERT INTO accounting.bas_acc_chart VALUES (173, 'Maintenance and Repairs', 0.00, 486.09, false, '004.014.005', 'Expense > Transport > Maintenance and Repairs');
+INSERT INTO accounting.bas_acc_chart VALUES (151, 'Phone and Internet', 0.00, 341.56, false, '004.002.015', 'Expense > House > Phone and Internet');
+INSERT INTO accounting.bas_acc_chart VALUES (152, 'Toys', 0.00, 1584.63, false, '004.005.001', 'Expense > Entertainment > Toys');
+INSERT INTO accounting.bas_acc_chart VALUES (153, 'Tours', 0.00, 0.00, false, '004.005.002', 'Expense > Entertainment > Tours');
+INSERT INTO accounting.bas_acc_chart VALUES (154, 'Trips', 0.00, 0.00, false, '004.005.003', 'Expense > Entertainment > Trips');
+INSERT INTO accounting.bas_acc_chart VALUES (155, 'TagPlus', 0.00, 0.00, false, '004.007.001', 'Expense > Company > TagPlus');
+INSERT INTO accounting.bas_acc_chart VALUES (156, 'Daniel', 0.00, 1075.00, false, '004.008.001', 'Expense > Children > Daniel');
+INSERT INTO accounting.bas_acc_chart VALUES (157, 'Erica', 0.00, 4696.50, false, '004.008.002', 'Expense > Children > Erica');
+INSERT INTO accounting.bas_acc_chart VALUES (158, 'Donations', 0.00, 880.37, false, '004.011.001', 'Expense > Gifts and Donations > Donations');
+INSERT INTO accounting.bas_acc_chart VALUES (159, 'Gifts', 0.00, 45.54, false, '004.011.002', 'Expense > Gifts and Donations > Gifts');
+INSERT INTO accounting.bas_acc_chart VALUES (160, 'Income Tax', 0.00, 0.00, false, '004.012.001', 'Expense > Leeches > Income Tax');
+INSERT INTO accounting.bas_acc_chart VALUES (161, 'Bank Interest', 0.00, 0.00, false, '004.012.002', 'Expense > Leeches > Bank Interest');
+INSERT INTO accounting.bas_acc_chart VALUES (162, 'Bank Fees', 0.00, 72.67, false, '004.012.003', 'Expense > Leeches > Bank Fees');
+INSERT INTO accounting.bas_acc_chart VALUES (163, 'Consultations', 0.00, 0.00, false, '004.013.001', 'Expense > Health > Consultations');
+INSERT INTO accounting.bas_acc_chart VALUES (164, 'Exams', 0.00, 0.00, false, '004.013.002', 'Expense > Health > Exams');
+INSERT INTO accounting.bas_acc_chart VALUES (165, 'Glasses', 0.00, 0.00, false, '004.013.003', 'Expense > Health > Glasses');
+INSERT INTO accounting.bas_acc_chart VALUES (166, 'Health Plan', 0.00, 0.00, false, '004.013.004', 'Expense > Health > Health Plan');
+INSERT INTO accounting.bas_acc_chart VALUES (167, 'Medications', 0.00, 667.98, false, '004.013.005', 'Expense > Health > Medications');
+INSERT INTO accounting.bas_acc_chart VALUES (168, 'Therapies', 0.00, 0.00, false, '004.013.006', 'Expense > Health > Therapies');
+INSERT INTO accounting.bas_acc_chart VALUES (169, 'Fuel', 0.00, 732.76, false, '004.014.001', 'Expense > Transport > Fuel');
+INSERT INTO accounting.bas_acc_chart VALUES (170, 'Parking', 0.00, 44.40, false, '004.014.002', 'Expense > Transport > Parking');
+INSERT INTO accounting.bas_acc_chart VALUES (171, 'Vehicle Property Tax', 0.00, 0.00, false, '004.014.003', 'Expense > Transport > Vehicle Property Tax');
+INSERT INTO accounting.bas_acc_chart VALUES (172, 'Washing', 0.00, 50.00, false, '004.014.004', 'Expense > Transport > Washing');
+INSERT INTO accounting.bas_acc_chart VALUES (174, 'Tickets, taxi, etc.', 0.00, 8.50, false, '004.014.006', 'Expense > Transport > Tickets, taxi, etc.');
+INSERT INTO accounting.bas_acc_chart VALUES (175, 'Insurance', 0.00, 1325.97, false, '004.014.007', 'Expense > Transport > Insurance');
+INSERT INTO accounting.bas_acc_chart VALUES (103, 'Wallet Frederico', 0.00, 81.90, false, '001.001.002', 'Asset > Cash > Wallet Frederico');
 
 
 --
+-- TOC entry 3692 (class 0 OID 38764)
+-- Dependencies: 221
 -- Data for Name: eve_acc_entries; Type: TABLE DATA; Schema: accounting; Owner: derole
 --
 
@@ -1564,73 +1681,22 @@ INSERT INTO accounting.eve_acc_entries VALUES (767, 6.22, 0.00, 133, 159);
 
 
 --
+-- TOC entry 3694 (class 0 OID 38769)
+-- Dependencies: 223
 -- Data for Name: eve_bus_transactions; Type: TABLE DATA; Schema: accounting; Owner: derole
 --
 
-INSERT INTO accounting.eve_bus_transactions VALUES (21, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 02/01 14:01 POSTO NUCLEO');
-INSERT INTO accounting.eve_bus_transactions VALUES (22, '2018-01-03 00:00:00-02', '2018-01-03 00:00:00-02', 5, 'Frete do Sofá.');
-INSERT INTO accounting.eve_bus_transactions VALUES (23, '2018-01-07 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Lanche');
-INSERT INTO accounting.eve_bus_transactions VALUES (24, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 15/01 17:19 VAREJAO DA FARTURA');
-INSERT INTO accounting.eve_bus_transactions VALUES (25, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Pagamento de Ttulo - BANCO BRADESCO S.A.');
-INSERT INTO accounting.eve_bus_transactions VALUES (27, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 08/01 17:21 MULTIPLAN ADMINIS');
-INSERT INTO accounting.eve_bus_transactions VALUES (28, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (29, '2018-11-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (31, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Pagamento conta luz - CEB');
-INSERT INTO accounting.eve_bus_transactions VALUES (32, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 13:10 COMANDO AUTO PECAS');
-INSERT INTO accounting.eve_bus_transactions VALUES (34, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 08/01 15:20 GERAR BANHO E TOSA');
-INSERT INTO accounting.eve_bus_transactions VALUES (35, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 16:40 FCIA PAGUE MENOS (estornado falhou)');
-INSERT INTO accounting.eve_bus_transactions VALUES (37, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 16:40 FCIA PAGUE MENOS');
-INSERT INTO accounting.eve_bus_transactions VALUES (38, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 06/01 12:42 CASA VELHA');
-INSERT INTO accounting.eve_bus_transactions VALUES (40, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 10/01 16:40 NOVA REDE SUPERME');
-INSERT INTO accounting.eve_bus_transactions VALUES (42, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Pagamento de Ttulo - BANCO BRADESCO S.A.');
-INSERT INTO accounting.eve_bus_transactions VALUES (44, '2018-01-12 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 12/01 13:31 MANAS COZINHA MIN');
-INSERT INTO accounting.eve_bus_transactions VALUES (46, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 13:33 CASA VELHA CAPITA');
-INSERT INTO accounting.eve_bus_transactions VALUES (47, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Lavagem');
-INSERT INTO accounting.eve_bus_transactions VALUES (48, '2018-01-03 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 03/01 12:34 MANAS COZINHA');
-INSERT INTO accounting.eve_bus_transactions VALUES (49, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Planta');
-INSERT INTO accounting.eve_bus_transactions VALUES (50, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 02/01 17:08 AGROINDUST E COM');
-INSERT INTO accounting.eve_bus_transactions VALUES (52, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Pagamento de Telefone');
-INSERT INTO accounting.eve_bus_transactions VALUES (54, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 08/01 16:26 LOUNGERIE');
-INSERT INTO accounting.eve_bus_transactions VALUES (55, '2018-01-09 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Pagto conta telefone - VIVO DF');
-INSERT INTO accounting.eve_bus_transactions VALUES (58, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Transferido da gaveta para a carteira da Clarissa');
-INSERT INTO accounting.eve_bus_transactions VALUES (59, '2018-01-02 00:00:00-02', '2018-01-03 00:00:00-02', 5, 'Rifa');
 INSERT INTO accounting.eve_bus_transactions VALUES (60, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
 INSERT INTO accounting.eve_bus_transactions VALUES (61, '2018-01-07 00:00:00-02', '2018-01-09 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (62, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 06/01 13:29 VAREJAO DA FARTURA');
 INSERT INTO accounting.eve_bus_transactions VALUES (64, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (65, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 16/01 12:15 COR DE OURO BOUTIQUE');
-INSERT INTO accounting.eve_bus_transactions VALUES (66, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 15/01 17:32 RAFAELLA SAMPAIO');
-INSERT INTO accounting.eve_bus_transactions VALUES (68, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 06/01 12:46 EMBALAGENS FLORID');
-INSERT INTO accounting.eve_bus_transactions VALUES (69, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 10/01 14:36 POSTO PETROMINAS');
 INSERT INTO accounting.eve_bus_transactions VALUES (70, '2018-01-10 00:00:00-02', '2018-01-02 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (71, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'BB Seguro Auto');
-INSERT INTO accounting.eve_bus_transactions VALUES (73, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 13/01 18:22 PANIFICADORA PARK WA');
-INSERT INTO accounting.eve_bus_transactions VALUES (74, '2018-01-09 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Pagto conta telefone - VIVO DF');
 INSERT INTO accounting.eve_bus_transactions VALUES (75, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (76, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Estorno de Compra  FCIA PAGUE MENOS');
-INSERT INTO accounting.eve_bus_transactions VALUES (77, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 07/01 09:38 DROGARIA SANTO AN');
-INSERT INTO accounting.eve_bus_transactions VALUES (78, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 18:21 SO REPAROS');
 INSERT INTO accounting.eve_bus_transactions VALUES (80, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Pagamento de Ttulo - CAIXA ECONOMICA FEDERAL');
 INSERT INTO accounting.eve_bus_transactions VALUES (81, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (82, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 11:36 MINI KALZONE');
-INSERT INTO accounting.eve_bus_transactions VALUES (84, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 10/01 15:21 LOJAS AMERICANAS');
-INSERT INTO accounting.eve_bus_transactions VALUES (85, '2018-05-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
 INSERT INTO accounting.eve_bus_transactions VALUES (86, '2018-01-09 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Pagto conta telefone - VIVO DF');
 INSERT INTO accounting.eve_bus_transactions VALUES (87, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Guardador de carro');
-INSERT INTO accounting.eve_bus_transactions VALUES (88, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 08/01 16:01 DROGASIL 433');
-INSERT INTO accounting.eve_bus_transactions VALUES (91, '2018-06-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (92, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 11/01 16:48 DROGAFUJI CSB 2');
-INSERT INTO accounting.eve_bus_transactions VALUES (94, '2018-07-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (95, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (97, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 16/01 10:06 MAXXI');
-INSERT INTO accounting.eve_bus_transactions VALUES (98, '2018-01-12 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Compra com Carto - 12/01 14:36 SUPER ADEGA');
-INSERT INTO accounting.eve_bus_transactions VALUES (99, '2018-10-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (100, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Compra com Carto - 02/01 17:16 FCIA PAGUE MENOS');
-INSERT INTO accounting.eve_bus_transactions VALUES (101, '2018-09-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
 INSERT INTO accounting.eve_bus_transactions VALUES (103, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Galego');
 INSERT INTO accounting.eve_bus_transactions VALUES (104, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, '');
-INSERT INTO accounting.eve_bus_transactions VALUES (105, '2018-03-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
-INSERT INTO accounting.eve_bus_transactions VALUES (106, '2018-04-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 3598      38867-X ABRIGO 002/012');
 INSERT INTO accounting.eve_bus_transactions VALUES (108, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Pagamento de Ttulo - ITAU UNIBANCO S.A.');
 INSERT INTO accounting.eve_bus_transactions VALUES (109, '2017-12-26 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'SHOPTIME.COM  PARC 01/10 RIO DE JANEI');
 INSERT INTO accounting.eve_bus_transactions VALUES (110, '2017-11-21 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'ZINZANE       PARC 02/07 BRASILIA');
@@ -1641,6 +1707,40 @@ INSERT INTO accounting.eve_bus_transactions VALUES (114, '2017-08-30 00:00:00-03
 INSERT INTO accounting.eve_bus_transactions VALUES (115, '2017-11-30 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'BB SEGUROS AU PARC 02/06 SAO PAULO');
 INSERT INTO accounting.eve_bus_transactions VALUES (116, '2017-04-20 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'VIVO PARKSHOP PARC 09/12 BRASILIA');
 INSERT INTO accounting.eve_bus_transactions VALUES (117, '2017-12-26 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'SHOPTIME.COM  PARC 01/10 RIO DE JANEI');
+INSERT INTO accounting.eve_bus_transactions VALUES (98, '2018-01-12 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Credit Card Purchase - 01/12 14:36 SUPER ADEGA');
+INSERT INTO accounting.eve_bus_transactions VALUES (59, '2018-01-02 00:00:00-02', '2018-01-03 00:00:00-02', 5, 'Raffle');
+INSERT INTO accounting.eve_bus_transactions VALUES (21, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Gasoline');
+INSERT INTO accounting.eve_bus_transactions VALUES (22, '2018-01-03 00:00:00-02', '2018-01-03 00:00:00-02', 5, 'Sofa shipping');
+INSERT INTO accounting.eve_bus_transactions VALUES (23, '2018-01-07 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Snack');
+INSERT INTO accounting.eve_bus_transactions VALUES (24, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Food');
+INSERT INTO accounting.eve_bus_transactions VALUES (25, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Bill Payment');
+INSERT INTO accounting.eve_bus_transactions VALUES (27, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Condominium payment');
+INSERT INTO accounting.eve_bus_transactions VALUES (85, '2018-05-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (91, '2018-06-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (94, '2018-07-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (95, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (99, '2018-10-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (101, '2018-09-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (105, '2018-03-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (106, '2018-04-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Periodic transfer - donation - 30/11 3598      38867-X  002/012');
+INSERT INTO accounting.eve_bus_transactions VALUES (28, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Entry');
+INSERT INTO accounting.eve_bus_transactions VALUES (29, '2018-11-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Donation');
+INSERT INTO accounting.eve_bus_transactions VALUES (31, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Electricity');
+INSERT INTO accounting.eve_bus_transactions VALUES (32, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Car Repair');
+INSERT INTO accounting.eve_bus_transactions VALUES (34, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Dog Washing');
+INSERT INTO accounting.eve_bus_transactions VALUES (35, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Medicines');
+INSERT INTO accounting.eve_bus_transactions VALUES (37, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Medicines');
+INSERT INTO accounting.eve_bus_transactions VALUES (38, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Restaurant');
+INSERT INTO accounting.eve_bus_transactions VALUES (42, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Bill Payment');
+INSERT INTO accounting.eve_bus_transactions VALUES (44, '2018-01-12 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Manas Restaurant ');
+INSERT INTO accounting.eve_bus_transactions VALUES (47, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Car Washing');
+INSERT INTO accounting.eve_bus_transactions VALUES (49, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Fig seedling');
+INSERT INTO accounting.eve_bus_transactions VALUES (52, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Telephone bill');
+INSERT INTO accounting.eve_bus_transactions VALUES (55, '2018-01-09 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Mobile bill');
+INSERT INTO accounting.eve_bus_transactions VALUES (58, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Drawer to wallet transfer');
+INSERT INTO accounting.eve_bus_transactions VALUES (71, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Insurance payment');
+INSERT INTO accounting.eve_bus_transactions VALUES (74, '2018-01-09 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Mobile bill');
+INSERT INTO accounting.eve_bus_transactions VALUES (76, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Reversal');
 INSERT INTO accounting.eve_bus_transactions VALUES (118, '2017-11-30 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'BB SEGUROS AU PARC 02/06 SAO PAULO');
 INSERT INTO accounting.eve_bus_transactions VALUES (119, '2017-05-16 00:00:00-03', '2018-01-08 00:00:00-02', 5, 'PAGSEGUROUOL* PARC 08/10 OLINDA');
 INSERT INTO accounting.eve_bus_transactions VALUES (120, '2017-11-24 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'EXTRA 1347    PARC 02/10 BRASILIA');
@@ -1753,14 +1853,6 @@ INSERT INTO accounting.eve_bus_transactions VALUES (226, '2017-11-16 00:00:00-02
 INSERT INTO accounting.eve_bus_transactions VALUES (227, '2017-11-30 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'BB SEGUROS AU PARC 02/06 SAO PAULO');
 INSERT INTO accounting.eve_bus_transactions VALUES (228, '2017-12-26 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'GERAR BANHO E PARC 01/06 BRASILIA');
 INSERT INTO accounting.eve_bus_transactions VALUES (229, '2017-12-27 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'GERAR BANHO E PARC 01/06 BRASILIA');
-INSERT INTO accounting.eve_bus_transactions VALUES (317, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial da Poupança');
-INSERT INTO accounting.eve_bus_transactions VALUES (326, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial Conta corrente Clarissa');
-INSERT INTO accounting.eve_bus_transactions VALUES (334, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo inicial carteira Fredd');
-INSERT INTO accounting.eve_bus_transactions VALUES (339, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial carteira Clarissa');
-INSERT INTO accounting.eve_bus_transactions VALUES (345, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial da gaveta');
-INSERT INTO accounting.eve_bus_transactions VALUES (389, '2018-01-23 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo desconhecido. Lançamento como saldo inicial. Consertar depois');
-INSERT INTO accounting.eve_bus_transactions VALUES (403, '2018-01-23 00:00:00-02', '2018-01-11 00:00:00-02', 5, 'Tranf Gaveta Carteira Clarissa');
-INSERT INTO accounting.eve_bus_transactions VALUES (409, '2018-01-23 00:00:00-02', '2018-01-10 00:00:00-02', 5, 'Saque banco >> clarissa carteira');
 INSERT INTO accounting.eve_bus_transactions VALUES (536, '2018-01-24 00:00:00-02', '2018-01-18 00:00:00-02', 5, 'Almoço da Vargem');
 INSERT INTO accounting.eve_bus_transactions VALUES (540, '2018-01-24 00:00:00-02', '2018-01-18 00:00:00-02', 5, 'Lanche');
 INSERT INTO accounting.eve_bus_transactions VALUES (544, '2018-01-24 00:00:00-02', '2018-01-19 00:00:00-02', 5, 'Manicure');
@@ -1768,42 +1860,79 @@ INSERT INTO accounting.eve_bus_transactions VALUES (548, '2018-01-24 00:00:00-02
 INSERT INTO accounting.eve_bus_transactions VALUES (552, '2018-01-24 00:00:00-02', '2018-01-23 00:00:00-02', 5, 'estacionamento TJDFT');
 INSERT INTO accounting.eve_bus_transactions VALUES (558, '2018-01-24 00:00:00-02', '2018-01-23 00:00:00-02', 5, 'lanche');
 INSERT INTO accounting.eve_bus_transactions VALUES (561, '2018-01-24 00:00:00-02', '2018-01-23 00:00:00-02', 5, 'estacionamento RPG');
-INSERT INTO accounting.eve_bus_transactions VALUES (26, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Ônibus e metrô');
-INSERT INTO accounting.eve_bus_transactions VALUES (30, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Serviço de Conserto da Caixa d''água');
-INSERT INTO accounting.eve_bus_transactions VALUES (39, '2018-08-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 ABRIGO');
-INSERT INTO accounting.eve_bus_transactions VALUES (41, '2018-02-02 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 ABRIGO');
-INSERT INTO accounting.eve_bus_transactions VALUES (45, '2018-12-02 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Transferncia Peridica - 30/11 ABRIGO');
-INSERT INTO accounting.eve_bus_transactions VALUES (53, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Dinheiro Perdido');
-INSERT INTO accounting.eve_bus_transactions VALUES (67, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Transferncia enviada - 02/01');
-INSERT INTO accounting.eve_bus_transactions VALUES (89, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Tranferencia');
 INSERT INTO accounting.eve_bus_transactions VALUES (107, '2018-01-09 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Depósito May ajuda aluguel da Érica');
+INSERT INTO accounting.eve_bus_transactions VALUES (82, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Credit Card Purchase - 11/01 11:36 MINI KALZONE');
+INSERT INTO accounting.eve_bus_transactions VALUES (84, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Credit Card Purchase - 10/01 15:21 LOJAS AMERICANAS');
+INSERT INTO accounting.eve_bus_transactions VALUES (88, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Credit Card Purchase - 08/01 16:01 DROGASIL 433');
+INSERT INTO accounting.eve_bus_transactions VALUES (92, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Credit Card Purchase - 11/01 16:48 DROGAFUJI CSB 2');
+INSERT INTO accounting.eve_bus_transactions VALUES (97, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Credit Card Purchase - 16/01 10:06 MAXXI');
+INSERT INTO accounting.eve_bus_transactions VALUES (100, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Credit Card Purchase - 02/01 17:16 FCIA PAGUE MENOS');
+INSERT INTO accounting.eve_bus_transactions VALUES (334, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo inicial wallet Fredd');
+INSERT INTO accounting.eve_bus_transactions VALUES (339, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial wallet Clarissa');
+INSERT INTO accounting.eve_bus_transactions VALUES (409, '2018-01-23 00:00:00-02', '2018-01-10 00:00:00-02', 5, 'Saque banco >> clarissa wallet');
+INSERT INTO accounting.eve_bus_transactions VALUES (50, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Ferilizer');
+INSERT INTO accounting.eve_bus_transactions VALUES (53, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Lost');
+INSERT INTO accounting.eve_bus_transactions VALUES (77, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Medicine');
+INSERT INTO accounting.eve_bus_transactions VALUES (345, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial da drawer');
+INSERT INTO accounting.eve_bus_transactions VALUES (26, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Bus and Subway');
+INSERT INTO accounting.eve_bus_transactions VALUES (89, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Transfer');
+INSERT INTO accounting.eve_bus_transactions VALUES (39, '2018-08-02 00:00:00-03', '2018-01-09 00:00:00-02', 5, 'Donation');
+INSERT INTO accounting.eve_bus_transactions VALUES (403, '2018-01-23 00:00:00-02', '2018-01-11 00:00:00-02', 5, 'Tranf Gaveta wallet Clarissa');
+INSERT INTO accounting.eve_bus_transactions VALUES (30, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'House repair');
+INSERT INTO accounting.eve_bus_transactions VALUES (317, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Initial Savings Balance');
+INSERT INTO accounting.eve_bus_transactions VALUES (326, '2018-01-22 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Saldo Inicial Clarissa Checking Account');
+INSERT INTO accounting.eve_bus_transactions VALUES (389, '2018-01-23 00:00:00-02', '2018-01-01 00:00:00-02', 5, 'Unknown Balance. Booked as initial balance. Consertar depois');
+INSERT INTO accounting.eve_bus_transactions VALUES (40, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Supermarket');
+INSERT INTO accounting.eve_bus_transactions VALUES (41, '2018-02-02 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Donation');
+INSERT INTO accounting.eve_bus_transactions VALUES (45, '2018-12-02 00:00:00-02', '2018-01-09 00:00:00-02', 5, 'Donation');
+INSERT INTO accounting.eve_bus_transactions VALUES (46, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Pipes to repair bathroom');
+INSERT INTO accounting.eve_bus_transactions VALUES (48, '2018-01-03 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Restaurant');
+INSERT INTO accounting.eve_bus_transactions VALUES (54, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Clothes');
+INSERT INTO accounting.eve_bus_transactions VALUES (62, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Supermarket');
+INSERT INTO accounting.eve_bus_transactions VALUES (65, '2018-01-16 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Clothes');
+INSERT INTO accounting.eve_bus_transactions VALUES (66, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Clothes');
+INSERT INTO accounting.eve_bus_transactions VALUES (67, '2018-01-02 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Transfer');
+INSERT INTO accounting.eve_bus_transactions VALUES (68, '2018-01-08 00:00:00-02', '2018-01-08 00:00:00-02', 5, 'Packaging');
+INSERT INTO accounting.eve_bus_transactions VALUES (69, '2018-01-10 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Gasoline');
+INSERT INTO accounting.eve_bus_transactions VALUES (73, '2018-01-15 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Bread');
+INSERT INTO accounting.eve_bus_transactions VALUES (78, '2018-01-11 00:00:00-02', '2018-01-17 00:00:00-02', 5, 'Pipes');
 
 
 --
+-- TOC entry 3697 (class 0 OID 38790)
+-- Dependencies: 226
 -- Data for Name: bas_permissions; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3699 (class 0 OID 38795)
+-- Dependencies: 228
 -- Data for Name: bas_roles; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3701 (class 0 OID 38801)
+-- Dependencies: 230
 -- Data for Name: bas_table_permissions; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3703 (class 0 OID 38805)
+-- Dependencies: 232
 -- Data for Name: bas_tables; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3705 (class 0 OID 38811)
+-- Dependencies: 234
 -- Data for Name: bas_users; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
@@ -1811,24 +1940,32 @@ INSERT INTO auth.bas_users VALUES (1, 'Frederico Sarmento', 'sdfhsdfg', 'sdfgsdf
 
 
 --
+-- TOC entry 3707 (class 0 OID 38818)
+-- Dependencies: 236
 -- Data for Name: eve_access_tokens; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3709 (class 0 OID 38825)
+-- Dependencies: 238
 -- Data for Name: eve_audit_log; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3711 (class 0 OID 38832)
+-- Dependencies: 240
 -- Data for Name: eve_refresh_tokens; Type: TABLE DATA; Schema: auth; Owner: derole
 --
 
 
 
 --
+-- TOC entry 3696 (class 0 OID 38779)
+-- Dependencies: 225
 -- Data for Name: bas_entities; Type: TABLE DATA; Schema: entities; Owner: derole
 --
 
@@ -1865,6 +2002,8 @@ INSERT INTO entities.bas_entities VALUES (34, 'JP Morgan Chase', NULL, NULL, NUL
 
 
 --
+-- TOC entry 3714 (class 0 OID 38840)
+-- Dependencies: 243
 -- Data for Name: todos; Type: TABLE DATA; Schema: public; Owner: derole
 --
 
@@ -1875,6 +2014,8 @@ INSERT INTO public.todos VALUES (20, 'conseguir', false);
 
 
 --
+-- TOC entry 3716 (class 0 OID 38847)
+-- Dependencies: 245
 -- Data for Name: bas_all_columns; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
 
@@ -1964,6 +2105,8 @@ INSERT INTO syslogic.bas_all_columns VALUES ('accounting.vw_eve_acc_entries.path
 
 
 --
+-- TOC entry 3717 (class 0 OID 38853)
+-- Dependencies: 246
 -- Data for Name: bas_data_dic; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
 
@@ -2053,6 +2196,8 @@ INSERT INTO syslogic.bas_data_dic VALUES (505, 'Column accounting.vw_eve_acc_ent
 
 
 --
+-- TOC entry 3718 (class 0 OID 38858)
+-- Dependencies: 247
 -- Data for Name: bas_data_dic_class; Type: TABLE DATA; Schema: syslogic; Owner: derole
 --
 
@@ -2061,6 +2206,8 @@ INSERT INTO syslogic.bas_data_dic_class VALUES (2, 'Basic Interface Object', 'Bu
 
 
 --
+-- TOC entry 3754 (class 0 OID 0)
+-- Dependencies: 220
 -- Name: bas_acc_chart_acc_id_seq; Type: SEQUENCE SET; Schema: accounting; Owner: derole
 --
 
@@ -2068,6 +2215,8 @@ SELECT pg_catalog.setval('accounting.bas_acc_chart_acc_id_seq', 227, true);
 
 
 --
+-- TOC entry 3755 (class 0 OID 0)
+-- Dependencies: 222
 -- Name: eve_acc_entries_entry_id_seq; Type: SEQUENCE SET; Schema: accounting; Owner: derole
 --
 
@@ -2075,6 +2224,8 @@ SELECT pg_catalog.setval('accounting.eve_acc_entries_entry_id_seq', 0, true);
 
 
 --
+-- TOC entry 3756 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: eve_bus_transactions_trans_id_seq; Type: SEQUENCE SET; Schema: accounting; Owner: derole
 --
 
@@ -2082,6 +2233,8 @@ SELECT pg_catalog.setval('accounting.eve_bus_transactions_trans_id_seq', 0, true
 
 
 --
+-- TOC entry 3757 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: bas_permissions_permission_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2089,6 +2242,8 @@ SELECT pg_catalog.setval('auth.bas_permissions_permission_id_seq', 1, false);
 
 
 --
+-- TOC entry 3758 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: bas_roles_role_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2096,6 +2251,8 @@ SELECT pg_catalog.setval('auth.bas_roles_role_id_seq', 1, false);
 
 
 --
+-- TOC entry 3759 (class 0 OID 0)
+-- Dependencies: 231
 -- Name: bas_table_permissions_tpermission_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2103,6 +2260,8 @@ SELECT pg_catalog.setval('auth.bas_table_permissions_tpermission_id_seq', 1, fal
 
 
 --
+-- TOC entry 3760 (class 0 OID 0)
+-- Dependencies: 233
 -- Name: bas_tables_table_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2110,6 +2269,8 @@ SELECT pg_catalog.setval('auth.bas_tables_table_id_seq', 1, false);
 
 
 --
+-- TOC entry 3761 (class 0 OID 0)
+-- Dependencies: 235
 -- Name: bas_users_user_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2117,6 +2278,8 @@ SELECT pg_catalog.setval('auth.bas_users_user_id_seq', 1, true);
 
 
 --
+-- TOC entry 3762 (class 0 OID 0)
+-- Dependencies: 237
 -- Name: eve_access_tokens_token_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2124,6 +2287,8 @@ SELECT pg_catalog.setval('auth.eve_access_tokens_token_id_seq', 1, false);
 
 
 --
+-- TOC entry 3763 (class 0 OID 0)
+-- Dependencies: 239
 -- Name: eve_audit_log_log_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2131,6 +2296,8 @@ SELECT pg_catalog.setval('auth.eve_audit_log_log_id_seq', 1, false);
 
 
 --
+-- TOC entry 3764 (class 0 OID 0)
+-- Dependencies: 241
 -- Name: eve_refresh_tokens_rtoken_id_seq; Type: SEQUENCE SET; Schema: auth; Owner: derole
 --
 
@@ -2138,6 +2305,8 @@ SELECT pg_catalog.setval('auth.eve_refresh_tokens_rtoken_id_seq', 1, false);
 
 
 --
+-- TOC entry 3765 (class 0 OID 0)
+-- Dependencies: 242
 -- Name: bas_entities_entity_id_seq; Type: SEQUENCE SET; Schema: entities; Owner: derole
 --
 
@@ -2145,6 +2314,8 @@ SELECT pg_catalog.setval('entities.bas_entities_entity_id_seq', 34, true);
 
 
 --
+-- TOC entry 3766 (class 0 OID 0)
+-- Dependencies: 244
 -- Name: todos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: derole
 --
 
@@ -2152,6 +2323,8 @@ SELECT pg_catalog.setval('public.todos_id_seq', 20, true);
 
 
 --
+-- TOC entry 3767 (class 0 OID 0)
+-- Dependencies: 248
 -- Name: bas_data_dic_class_class_id_seq; Type: SEQUENCE SET; Schema: syslogic; Owner: derole
 --
 
@@ -2159,6 +2332,8 @@ SELECT pg_catalog.setval('syslogic.bas_data_dic_class_class_id_seq', 2, true);
 
 
 --
+-- TOC entry 3768 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: bas_data_dic_def_id_seq; Type: SEQUENCE SET; Schema: syslogic; Owner: derole
 --
 
@@ -2166,6 +2341,7 @@ SELECT pg_catalog.setval('syslogic.bas_data_dic_def_id_seq', 505, true);
 
 
 --
+-- TOC entry 3502 (class 2606 OID 38881)
 -- Name: bas_acc_chart bas_acc_chart_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -2174,6 +2350,7 @@ ALTER TABLE ONLY accounting.bas_acc_chart
 
 
 --
+-- TOC entry 3504 (class 2606 OID 38883)
 -- Name: eve_acc_entries eve_acc_entries_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -2182,6 +2359,7 @@ ALTER TABLE ONLY accounting.eve_acc_entries
 
 
 --
+-- TOC entry 3506 (class 2606 OID 38885)
 -- Name: eve_bus_transactions eve_bus_transactions_pkey; Type: CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -2190,6 +2368,7 @@ ALTER TABLE ONLY accounting.eve_bus_transactions
 
 
 --
+-- TOC entry 3510 (class 2606 OID 38887)
 -- Name: bas_permissions bas_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2198,6 +2377,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
+-- TOC entry 3512 (class 2606 OID 38889)
 -- Name: bas_roles bas_roles_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2206,6 +2386,7 @@ ALTER TABLE ONLY auth.bas_roles
 
 
 --
+-- TOC entry 3514 (class 2606 OID 38891)
 -- Name: bas_table_permissions bas_table_permissions_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2214,6 +2395,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
+-- TOC entry 3516 (class 2606 OID 38893)
 -- Name: bas_tables bas_tables_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2222,6 +2404,7 @@ ALTER TABLE ONLY auth.bas_tables
 
 
 --
+-- TOC entry 3518 (class 2606 OID 38895)
 -- Name: bas_users bas_users_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2230,6 +2413,7 @@ ALTER TABLE ONLY auth.bas_users
 
 
 --
+-- TOC entry 3520 (class 2606 OID 38897)
 -- Name: eve_access_tokens eve_access_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2238,6 +2422,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
+-- TOC entry 3522 (class 2606 OID 38899)
 -- Name: eve_audit_log eve_audit_log_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2246,6 +2431,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
+-- TOC entry 3524 (class 2606 OID 38901)
 -- Name: eve_refresh_tokens eve_refresh_tokens_pkey; Type: CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2254,6 +2440,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
 
 
 --
+-- TOC entry 3508 (class 2606 OID 38903)
 -- Name: bas_entities bas_entities_pkey; Type: CONSTRAINT; Schema: entities; Owner: derole
 --
 
@@ -2262,6 +2449,7 @@ ALTER TABLE ONLY entities.bas_entities
 
 
 --
+-- TOC entry 3526 (class 2606 OID 38905)
 -- Name: todos todos_pkey; Type: CONSTRAINT; Schema: public; Owner: derole
 --
 
@@ -2270,6 +2458,7 @@ ALTER TABLE ONLY public.todos
 
 
 --
+-- TOC entry 3528 (class 2606 OID 38907)
 -- Name: bas_all_columns bas_all_columns_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -2278,6 +2467,7 @@ ALTER TABLE ONLY syslogic.bas_all_columns
 
 
 --
+-- TOC entry 3532 (class 2606 OID 38909)
 -- Name: bas_data_dic_class bas_data_dic_class_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -2286,6 +2476,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic_class
 
 
 --
+-- TOC entry 3530 (class 2606 OID 38911)
 -- Name: bas_data_dic bas_data_dic_pkey; Type: CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -2294,6 +2485,7 @@ ALTER TABLE ONLY syslogic.bas_data_dic
 
 
 --
+-- TOC entry 3542 (class 2620 OID 39078)
 -- Name: bas_acc_chart bas_acc_chart_delete_cascade_after_delete_trigger; Type: TRIGGER; Schema: accounting; Owner: derole
 --
 
@@ -2301,6 +2493,7 @@ CREATE TRIGGER bas_acc_chart_delete_cascade_after_delete_trigger AFTER DELETE ON
 
 
 --
+-- TOC entry 3543 (class 2620 OID 39083)
 -- Name: bas_acc_chart bas_acc_chart_update_children_after_update_parent_trigger; Type: TRIGGER; Schema: accounting; Owner: derole
 --
 
@@ -2308,6 +2501,7 @@ CREATE TRIGGER bas_acc_chart_update_children_after_update_parent_trigger AFTER U
 
 
 --
+-- TOC entry 3544 (class 2620 OID 39081)
 -- Name: bas_acc_chart bas_acc_chart_update_path_before_insert_or_update_trigger; Type: TRIGGER; Schema: accounting; Owner: derole
 --
 
@@ -2315,6 +2509,7 @@ CREATE TRIGGER bas_acc_chart_update_path_before_insert_or_update_trigger BEFORE 
 
 
 --
+-- TOC entry 3545 (class 2620 OID 38912)
 -- Name: bas_all_columns delete_bas_data_dic_trigger; Type: TRIGGER; Schema: syslogic; Owner: derole
 --
 
@@ -2322,6 +2517,7 @@ CREATE TRIGGER delete_bas_data_dic_trigger AFTER DELETE ON syslogic.bas_all_colu
 
 
 --
+-- TOC entry 3546 (class 2620 OID 38913)
 -- Name: bas_all_columns insert_bas_data_dic_trigger; Type: TRIGGER; Schema: syslogic; Owner: derole
 --
 
@@ -2329,6 +2525,7 @@ CREATE TRIGGER insert_bas_data_dic_trigger AFTER INSERT ON syslogic.bas_all_colu
 
 
 --
+-- TOC entry 3533 (class 2606 OID 38914)
 -- Name: eve_acc_entries eve_acc_entries_bus_trans_id_fkey; Type: FK CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -2337,6 +2534,7 @@ ALTER TABLE ONLY accounting.eve_acc_entries
 
 
 --
+-- TOC entry 3534 (class 2606 OID 38919)
 -- Name: eve_bus_transactions eve_bus_transactions_entity_id_fkey; Type: FK CONSTRAINT; Schema: accounting; Owner: derole
 --
 
@@ -2345,6 +2543,7 @@ ALTER TABLE ONLY accounting.eve_bus_transactions
 
 
 --
+-- TOC entry 3535 (class 2606 OID 38924)
 -- Name: bas_permissions bas_permissions_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2353,6 +2552,7 @@ ALTER TABLE ONLY auth.bas_permissions
 
 
 --
+-- TOC entry 3536 (class 2606 OID 38929)
 -- Name: bas_table_permissions bas_table_permissions_role_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2361,6 +2561,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
+-- TOC entry 3537 (class 2606 OID 38934)
 -- Name: bas_table_permissions bas_table_permissions_table_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2369,6 +2570,7 @@ ALTER TABLE ONLY auth.bas_table_permissions
 
 
 --
+-- TOC entry 3538 (class 2606 OID 38939)
 -- Name: eve_access_tokens eve_access_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2377,6 +2579,7 @@ ALTER TABLE ONLY auth.eve_access_tokens
 
 
 --
+-- TOC entry 3539 (class 2606 OID 38944)
 -- Name: eve_audit_log eve_audit_log_entity_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2385,6 +2588,7 @@ ALTER TABLE ONLY auth.eve_audit_log
 
 
 --
+-- TOC entry 3540 (class 2606 OID 38949)
 -- Name: eve_refresh_tokens eve_refresh_tokens_user_id_fkey; Type: FK CONSTRAINT; Schema: auth; Owner: derole
 --
 
@@ -2393,6 +2597,7 @@ ALTER TABLE ONLY auth.eve_refresh_tokens
 
 
 --
+-- TOC entry 3541 (class 2606 OID 38954)
 -- Name: bas_data_dic bas_data_dic_col_id_fkey; Type: FK CONSTRAINT; Schema: syslogic; Owner: derole
 --
 
@@ -2401,6 +2606,8 @@ ALTER TABLE ONLY syslogic.bas_data_dic
 
 
 --
+-- TOC entry 3728 (class 0 OID 0)
+-- Dependencies: 10
 -- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
 --
 
@@ -2409,6 +2616,7 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
+-- TOC entry 3471 (class 3466 OID 38975)
 -- Name: sync_bas_all_columns_event; Type: EVENT TRIGGER; Schema: -; Owner: postgres
 --
 
@@ -2418,6 +2626,8 @@ CREATE EVENT TRIGGER sync_bas_all_columns_event ON ddl_command_end
 
 
 ALTER EVENT TRIGGER sync_bas_all_columns_event OWNER TO postgres;
+
+-- Completed on 2023-08-22 15:58:59 -03
 
 --
 -- PostgreSQL database dump complete
